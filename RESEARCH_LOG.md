@@ -4,15 +4,42 @@ Newest entries first. Every session ends by updating "Next up".
 
 ## Next up
 
-1. **Read the look-elsewhere result** of ID-035 batch 1: `runs/catalogue_lee_100.log`
-   (100 w0wa mocks × 33 models, ≈ 3 h). Apply the pre-registered criterion: p < 0.01 for
-   T_real = 2.07 → candidate; otherwise batch 1 found nothing beyond w0wa. Log it in IDEAS.md.
-2. If nothing survives: batch 2 of the idea factory. Better ideas need a physical story *and*
-   a crossing shape (all top models cross −1). Harvest the models the agents could not give
-   in closed form (coupled DM–DE, f(T), entropic Chaplygin) via a small ODE solver.
-3. ID-034: the crossing question is now half-answered (thawing models ≈ 3–4 AIC worse than
-   w0wa). Pre-register a mock test with the best thawing model as truth.
-4. Speed: one catalogue pass is ≈ 30 CPU-minutes; a coarser high-z grid could cut this.
+Setup on a new machine: `uv venv --python 3.12 .venv`, `uv pip install -r requirements.txt`,
+`python scripts/download_data.py`. `runs/` is gitignored, so run outputs stay on the machine
+that made them.
+
+1. **Read the look-elsewhere result** of ID-035 batch 1: `runs/catalogue_lee_100.log` and
+   `runs/catalogue_lee_32models_100mocks.txt` (restarted 2026-11-24 19:01 on this machine;
+   ≈ 2 min per mock). Apply the pre-registered criterion: p < 0.01 for T_real = 2.07 →
+   candidate; otherwise batch 1 found nothing beyond w0wa. Log it in IDEAS.md.
+2. **Score batch 2 (ID-036)**: `python scripts/run_catalogue2.py` (≈ 5 min) →
+   docs/catalogue2-leaderboard.md. Then, only after step 1's file exists,
+   `python scripts/catalogue2_lee.py 100` (≈ 7–8 h on 16 cores). Criteria are frozen in IDEAS.md.
+3. **ID-034 part A** (pre-registered): `python scripts/crossing_mock_test.py` (500 mocks per
+   truth, ≈ 3 h). Check the validation gate first.
+4. Later: the 33 "needs ODE" ideas at the end of docs/batch2-harvest/*.md need a small ODE
+   solver (batch 3). Speed: a coarser high-z grid could cut the ≈ 30 CPU-minute catalogue pass.
+
+## 2026-11-24 (session 13) — Batch 2 harvested and frozen; ID-034 pre-registered
+
+- The batch-1 look-elsewhere run had been stopped early on another machine; restarted here
+  (new .venv via uv, CAMB 2.0.5, 44 tests pass). It reproduces real T = 2.07.
+- **ID-034 part A pre-registered**: two non-crossing truths (Dutta–Scherrer thawing, running
+  vacuum), 500 mocks each, validation gate, p thresholds 0.01 / 0.05. Written before computing.
+  Script ready, not run. Clarified before any run: SN dof is n − k − 1 (magnitude profiled out).
+- **ID-036 batch-2 rules pre-registered** before the harvest was read: same criteria as ID-035,
+  look-elsewhere over batch 1 + 2 on the same mocks, ranges frozen at commit.
+- **Harvest**: 8 agents, one per field cluster (condensed matter, biology, economics/control,
+  information/ML, chemistry/particle, geoscience/fluids, math/quantum, signals/dynamics):
+  83 ideas, each with a web-checked prior-art search. Curated to **76 models** (7 exact
+  duplicates merged), 10 labelled known. docs/batch2-curation.md.
+- **Learned:** the same log-periodic form was proposed independently by three agents; many ideas
+  converge on a few shapes (onset with a critical exponent, staircases, log-periodic
+  oscillations, relaxation in cosmic time). With 2–3 numbers of w(z) constrained by the data,
+  the look-elsewhere step will decide, not the leaderboard.
+- Tests caught one harvested formula bug before any fit (SIR final size used the wrong Lambert W
+  branch). Three start values moved so they pass the sanity gate; ranges unchanged.
+- No model fitted to real data; hypothesis count unchanged (47).
 
 ## 2026-11-24 (session 12) — Idea factory, batch 1 (ID-035)
 

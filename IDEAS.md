@@ -67,7 +67,12 @@ use only to confirm a finalist. (Decided 2026-11-24.)
     land within ±2 AIC of w0wa; a win needs the right shape with fewer parameters. The more models,
     the larger T gets on mocks by chance; the look-elsewhere step is what decides.
   - Hypothesis count: every scored model counts as one test.
-- Data: as ID-035. Code: src/aicosmo/catalogue2.py (to be written), scripts/run_catalogue.py.
+- **Catalogue frozen (2026-11-24, session 13, before any fit to real data): 76 models**
+  in src/aicosmo/catalogue2.py, from 83 harvested ideas (7 exact duplicates merged; 10 labelled
+  "known"). Curation record, merges, one formula bug fixed and three start values moved:
+  docs/batch2-curation.md. All pass tests/test_catalogue2.py. Ranges are now frozen.
+- Data: as ID-035. Code: src/aicosmo/catalogue2.py, scripts/run_catalogue2.py (leaderboard),
+  scripts/catalogue2_lee.py (look-elsewhere, combined with batch 1 on the same seeds).
 - Date: 2026-11-24
 
 ### ID-035 — Idea factory, batch 1: score many expansion histories, mock-calibrated
