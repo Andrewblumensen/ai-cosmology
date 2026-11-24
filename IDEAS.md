@@ -38,6 +38,13 @@ use only to confirm a finalist. (Decided 2026-11-24.)
   keep pace with precision; flukes and release-specific systematics fade.
 - If true, it would mean: an objective ranking of which anomalies behave like real
   signals. That decides where all later effort goes.
+- **Pre-registered criterion (written 2026-11-24, before collecting numbers):** for each
+  pair of successive releases where the newer data include the older, let Δ be the
+  anomaly's effect size (deviation from the standard expectation) with error e.
+  pull = (Δ_new − Δ_old) / sqrt(e_old² − e_new²). "Fading" if pull < −1, "stable" if
+  |pull| ≤ 1, "growing" if pull > 1. Where releases are independent rather than nested,
+  use sqrt(e_old² + e_new²). Where only significances are published, use Δ/e = σ and
+  report the result as indicative only.
 - Date: 2026-11-24
 
 ### ID-021 — Public prediction registry for DESI DR3 and Euclid
