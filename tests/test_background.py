@@ -34,3 +34,14 @@ def test_cpl_density_matches_closed_form():
 def test_unphysical_history_rejected():
     with pytest.raises(ValueError):
         Background(-0.5)  # negative matter density makes H^2 < 0 above z ~ 0.44
+
+
+def test_density_form_matches_w_form():
+    from aicosmo.cosmology import Cosmology
+
+    w0, wa = -0.8, -0.5
+    rho = lambda z: (1 + z) ** (3 * (1 + w0 + wa)) * np.exp(-3 * wa * z / (1 + z))  # noqa: E731
+    a = Cosmology(0.68, 0.0222, 0.142, w=w_cpl(w0, wa))
+    b = Cosmology(0.68, 0.0222, 0.142, rho_de=rho)
+    assert b.theta_star == pytest.approx(a.theta_star, rel=1e-6)
+    assert np.allclose(a.E([0.5, 2.0]), b.E([0.5, 2.0]), rtol=1e-6)

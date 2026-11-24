@@ -38,9 +38,11 @@ class Param:
 class Model:
     name: str
     params: dict[str, Param]
-    w: Callable[..., WFunc]  # w(**params) -> callable w(z)
+    w: Callable[..., WFunc]  # w(**params) -> callable w(z), or rho_DE(z)/rho_DE(0) if density
     constraint: Callable[..., bool] | None = None  # extra prior, e.g. DESI's w0 + wa < 0
     notes: str = ""
+    density: bool = False    # True: `w` returns the dark-energy density ratio, not w(z)
+    source: str = ""         # reference or origin (paper, LLM, human)
 
     def w_of(self, theta: np.ndarray) -> WFunc:
         kw = dict(zip(self.params, theta))
@@ -78,12 +80,13 @@ class Data:
             return [0.68, 0.0222, 0.142], [0.01, 0.0003, 0.002], [1e-3, 2e-5, 2e-4]
         return [0.30, 101.5], [0.01, 1.0], [5e-4, 0.05]
 
-    def cosmology(self, base, w: WFunc) -> tuple[Cosmology, float]:
+    def cosmology(self, base, w: WFunc, density: bool = False) -> tuple[Cosmology, float]:
+        kw = {"rho_de": w} if density else {"w": w}
         if self.calibrated:
-            c = Cosmology(base[0], base[1], base[2], w)
+            c = Cosmology(base[0], base[1], base[2], **kw)
             return c, c.hrd
         h = 0.68  # only sets the tiny radiation term
-        return Cosmology(h, 0.0222, base[0] * h * h - OMEGA_NU, w), base[1]
+        return Cosmology(h, 0.0222, base[0] * h * h - OMEGA_NU, **kw), base[1]
 
     def chi2(self, c: Cosmology, hrd: float) -> float:
         out = sum(p.chi2(c) for p in self.priors)
@@ -118,7 +121,9 @@ class Score:
         return self.chi2 + self.k * np.log(self.n)
 
 
-def score(model: Model, data: Data, errors: bool = True) -> Score:
+def score(model: Model, data: Data, errors: bool = True, starts: int = 1, seed: int = 0) -> Score:
+    """Best fit of `model` to `data`. With starts > 1, also starts from random points inside
+    the model-parameter ranges (for multimodal models) and keeps the lowest chi2."""
     b0, bscale, bsteps = data.base()
     nb = len(b0)
     x0 = b0 + [p.x0 for p in model.params.values()]
@@ -126,18 +131,36 @@ def score(model: Model, data: Data, errors: bool = True) -> Score:
     steps = bsteps + [p.scale / 10 for p in model.params.values()]
 
     def f(x):
-        c, hrd = data.cosmology(x[:nb], model.w_of(x[nb:]))
+        c, hrd = data.cosmology(x[:nb], model.w_of(x[nb:]), model.density)
         return data.chi2(c, hrd)
 
     x, chi2 = best_fit(f, x0, scale)
+    rng = np.random.default_rng(seed)
+    for _ in range(starts - 1):
+        trial = list(b0) + [rng.uniform(max(p.lo, p.x0 - 5 * p.scale), min(p.hi, p.x0 + 5 * p.scale))
+                            for p in model.params.values()]
+        xt, ct = best_fit(f, trial, scale)
+        if ct < chi2:
+            x, chi2 = xt, ct
     err = gaussian_errors(f, x, steps) if errors else np.full(len(x), np.nan)
-    c, _ = data.cosmology(x[:nb], model.w_of(x[nb:]))
+    c, _ = data.cosmology(x[:nb], model.w_of(x[nb:]), model.density)
     names = (["h", "omega_b", "omega_bc"] if data.calibrated else ["Omega_m", "hrd"]) + list(model.params)
     best = dict(zip(names, map(float, x)))
     best["Omega_m"] = c.omega_m
     if data.calibrated:
         best["H0"] = 100 * x[0]
-    wz = model.w_of(x[nb:])(Z_CHECK[Z_CHECK <= 3]) + 1.0
+    wz = effective_w(model, x[nb:], Z_CHECK[Z_CHECK <= 3]) + 1.0
     return Score(model.name, chi2, len(x), data.n_points, best,
-                 dict(zip(names, map(float, err))), float(wz.min() - 1),
-                 bool(wz.min() < -1e-9 and wz.max() > 1e-9), x=np.asarray(x))
+                 dict(zip(names, map(float, err))), float(np.nanmin(wz) - 1),
+                 bool(np.nanmin(wz) < -1e-6 and np.nanmax(wz) > 1e-6), x=np.asarray(x))
+
+
+def effective_w(model: Model, theta, z: np.ndarray) -> np.ndarray:
+    """w(z); for density models w = -1 + (1+z) f'(z) / (3 f(z)) (NaN where f changes sign)."""
+    fn = model.w_of(theta)
+    if not model.density:
+        return np.asarray(fn(z), dtype=float) * np.ones_like(z)
+    f = np.asarray(fn(z), dtype=float) * np.ones_like(z)
+    w = -1 + (1 + z) * np.gradient(f, z) / (3 * f)
+    w[np.abs(f) < 1e-6] = np.nan
+    return w

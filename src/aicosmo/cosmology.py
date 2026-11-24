@@ -89,7 +89,10 @@ def early(name: str, omega_b: float, omega_bc: float) -> float:
 # --- the model ---------------------------------------------------------------
 
 class Cosmology:
-    def __init__(self, h: float, omega_b: float, omega_bc: float, w: WFunc = w_lcdm):
+    def __init__(self, h: float, omega_b: float, omega_bc: float, w: WFunc = w_lcdm,
+                 rho_de: WFunc | None = None):
+        """Dark energy is given either by w(z) or directly by rho_de(z) = rho_DE(z)/rho_DE(0)
+        (effective density: everything beyond matter and radiation, may go negative)."""
         self.h, self.omega_b, self.omega_bc = h, omega_b, omega_bc
         x = np.linspace(0.0, np.log1p(Z_MAX), N_GRID)  # x = ln(1 + z)
         z = np.expm1(x)
@@ -97,8 +100,11 @@ class Cosmology:
         omega_nu = omega_nu_massive(z)
         omega_de0 = h * h - omega_bc - omega_rad[0] - omega_nu[0]
         # rho_de(z)/rho_de(0) = exp(3 int (1 + w) dln(1+z))
-        log_rho_de = 3.0 * cumulative_trapezoid(1.0 + w(z), x, initial=0.0)
-        e2 = (omega_bc * (1 + z) ** 3 + omega_rad + omega_nu + omega_de0 * np.exp(log_rho_de)) / (h * h)
+        if rho_de is None:
+            de = np.exp(3.0 * cumulative_trapezoid(1.0 + w(z), x, initial=0.0))
+        else:
+            de = np.asarray(rho_de(z), dtype=float)
+        e2 = (omega_bc * (1 + z) ** 3 + omega_rad + omega_nu + omega_de0 * de) / (h * h)
         if np.any(e2 <= 0) or not np.all(np.isfinite(e2)):
             raise ValueError("Unphysical expansion history (H^2 <= 0 or non-finite).")
         self._x = x

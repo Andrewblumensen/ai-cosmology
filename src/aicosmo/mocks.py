@@ -21,7 +21,7 @@ from .score import Data, Model
 def fiducial_vectors(data: Data, model: Model, x: np.ndarray) -> dict[str, np.ndarray]:
     """Noise-free data vectors predicted by `model` at parameters x (base + model)."""
     nb = len(data.base()[0])
-    c, hrd = data.cosmology(x[:nb], model.w_of(x[nb:]))
+    c, hrd = data.cosmology(x[:nb], model.w_of(x[nb:]), model.density)
     out = {}
     if data.bao:
         out["bao"] = data.bao.predict(c, hrd)

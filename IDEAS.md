@@ -29,6 +29,28 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 
 ## Open ideas (highest priority first)
 
+### ID-035 — Idea factory, batch 1: score many expansion histories, mock-calibrated
+- Status: testing (pre-registered 2026-11-24, session 12, before the full batch was scored)
+- Origin: user + Claude. Catalogue = models harvested from 2025–26 DESI-era papers
+  ("paper-new"), older alternatives to Λ ("paper-old"), and new ones from Claude ("llm-new");
+  all in src/aicosmo/catalogue.py with sources.
+- If true, it would mean: an expansion history with a physical story that the data prefer over
+  w0wa, with a significance that survives the look-elsewhere effect over the whole catalogue.
+- Honesty note: the 5 llm-new models were scored once (pipeline smoke test) *before* this entry
+  was written. Smoke-test best: "tanh step in w", ΔAIC −2.07 vs w0wa. They stay in the
+  catalogue and count as tests; the criterion below applies to them unchanged.
+- **Pre-registered test.** Data: DESI DR2 BAO + CMB (θ*, ω_b, ω_bc) + Pantheon+. Per model:
+  best fit (4 starts), ΔAIC vs w0wa. Catalogue statistic: T = −min over models of ΔAIC(model − w0wa).
+  - *interesting*: a model with ΔAIC ≤ −2 vs w0wa.
+  - *promising* needs all of: (1) look-elsewhere: T on the real data is exceeded in < 1% of
+    ≥ 100 mocks generated from the best-fit w0wa (same catalogue, same fitting); (2) the
+    model has a physical interpretation, not just a shape; (3) it keeps ΔAIC ≤ −2 when the held-out
+    DES-SN5YR replaces Pantheon+ (only for a finalist, once).
+  - Secondary (feeds ID-034): the best model with no crossing (w ≥ −1 for z ≤ 3) vs w0wa.
+- Hypothesis count: every catalogue model counts as one test once scored.
+- Code: scripts/run_catalogue.py → docs/catalogue-leaderboard.md
+- Date: 2026-11-24
+
 ### ID-033 — Re-score the catalogue of published models on DESI DR2 (+ Pantheon+)
 - Status: **known** for the catalogue part (session 11). Literature check
   (docs/literature-dr2-rescoring.md): DESI 2503.14743, Chaudhary 2508.10514 (8 forms, same
