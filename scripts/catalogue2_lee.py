@@ -6,6 +6,8 @@ T = -min over models of Delta AIC(model - w0wa). Saves every AIC per mock and mo
 
 Usage: python scripts/catalogue2_lee.py [n_mocks]
 Needs runs/catalogue_lee_32models_<n>mocks.txt from the batch-1 run.
+Crash-safe: every finished fit goes to runs/catalogue2_lee_<models>models_<n>mocks.ckpt.jsonl;
+re-running the same command skips what is done.
 """
 
 import os
@@ -24,6 +26,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from aicosmo.catalogue import CATALOGUE  # noqa: E402
 from aicosmo.catalogue2 import CATALOGUE2  # noqa: E402
+from aicosmo.checkpoint import Checkpoint  # noqa: E402
 from aicosmo.mocks import fiducial_vectors, make_mock  # noqa: E402
 from aicosmo.score import W0WA, Data, score  # noqa: E402
 
@@ -55,7 +58,10 @@ def main() -> None:
     b1 = ROOT / "runs" / f"catalogue_lee_{len(CATALOGUE)}models_{n}mocks.txt"
     t1_mocks = np.loadtxt(b1)
     t1_real = float(open(b1).readline().split("=")[1])
-    real = np.array([_aic(m, DATA) for m in MODELS])
+    ck = Checkpoint(ROOT / "runs" / f"catalogue2_lee_{len(CATALOGUE2)}models_{n}mocks.ckpt.jsonl")
+    if "real" not in ck:
+        ck.add("real", [_aic(m, DATA) for m in MODELS])
+    real = np.array(ck["real"])
     t2_real = t_stat(real)
     t_real = max(t1_real, t2_real)
     print(f"{len(CATALOGUE2)} batch-2 models; real T: batch 1 {t1_real:.2f}, batch 2 {t2_real:.2f}, "
@@ -63,14 +69,21 @@ def main() -> None:
 
     jobs = [(s, i) for s in range(n) for i in range(len(MODELS))]
     per_mock: dict[int, dict[int, float]] = defaultdict(dict)
-    done = 0
+    for s, i in jobs:
+        if f"{s},{i}" in ck:
+            per_mock[s][i] = ck[f"{s},{i}"]
+    todo = [(s, i) for s, i in jobs if f"{s},{i}" not in ck]
+    done = sum(len(per_mock[s]) == len(MODELS) for s in range(n))
+    print(f"  resuming: {done}/{n} mocks complete, {len(todo)} fits to go", flush=True)
     with Pool(min(16, os.cpu_count())) as pool:
-        for seed, i, aic in pool.imap_unordered(one, jobs, chunksize=1):
+        for seed, i, aic in pool.imap_unordered(one, todo, chunksize=1):
+            ck.add(f"{seed},{i}", float(aic))
             per_mock[seed][i] = aic
             if len(per_mock[seed]) == len(MODELS):
                 done += 1
                 if done % max(1, n // 20) == 0:
                     print(f"  {done}/{n} mocks done", flush=True)
+    ck.close()
     aic = np.array([[per_mock[s][i] for i in range(len(MODELS))] for s in range(n)])
     t2_mocks = np.array([t_stat(a) for a in aic])
     t_all = np.maximum(t1_mocks, t2_mocks)

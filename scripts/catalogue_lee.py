@@ -4,7 +4,10 @@ Generate mocks from the best-fit w0wa model (truth = w0wa), score the whole cata
 each mock exactly as on the real data, and record T = -min over models of
 Delta AIC(model - w0wa). The p-value of the real T is the fraction of mocks with T >= T_real.
 
-Usage: python scripts/catalogue_lee.py [n_mocks]     (~1 h per 100 mocks on 16 cores)
+Usage: python scripts/catalogue_lee.py [n_mocks]     (~2 min per mock on 16 cores)
+
+Crash-safe: every finished fit is saved to runs/catalogue_lee_<models>models_<n>mocks.ckpt.jsonl.
+Re-running the same command after a shutdown skips everything already done.
 """
 
 import os
@@ -22,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from aicosmo.catalogue import CATALOGUE  # noqa: E402
+from aicosmo.checkpoint import Checkpoint  # noqa: E402
 from aicosmo.mocks import fiducial_vectors, make_mock  # noqa: E402
 from aicosmo.score import W0WA, Data, score  # noqa: E402
 
@@ -44,23 +48,34 @@ def t_stat(aic: dict[int, float]) -> float:
 
 def main() -> None:
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 100
-    real = {i: score(m, DATA, errors=False, starts=4).aic for i, m in enumerate(MODELS)}
-    t_real = t_stat(real)
+    stem = f"catalogue_lee_{len(CATALOGUE)}models_{n}mocks"
+    ck = Checkpoint(ROOT / "runs" / f"{stem}.ckpt.jsonl")
+
+    if "real" not in ck:
+        ck.add("real", [score(m, DATA, errors=False, starts=4).aic for m in MODELS])
+    t_real = t_stat(dict(enumerate(ck["real"])))
     print(f"{len(CATALOGUE)} catalogue models; real T = {t_real:.2f}", flush=True)
 
     jobs = [(s, i) for s in range(n) for i in range(len(MODELS))]
     per_mock: dict[int, dict[int, float]] = defaultdict(dict)
-    done = 0
+    for s, i in jobs:
+        if f"{s},{i}" in ck:
+            per_mock[s][i] = ck[f"{s},{i}"]
+    todo = [(s, i) for s, i in jobs if f"{s},{i}" not in ck]
+    done = sum(len(per_mock[s]) == len(MODELS) for s in range(n))
+    print(f"  resuming: {done}/{n} mocks complete, {len(todo)} fits to go", flush=True)
+
     with Pool(min(16, os.cpu_count())) as pool:
-        for seed, i, aic in pool.imap_unordered(one, jobs, chunksize=1):
+        for seed, i, aic in pool.imap_unordered(one, todo, chunksize=1):
+            ck.add(f"{seed},{i}", aic)
             per_mock[seed][i] = aic
             if len(per_mock[seed]) == len(MODELS):
                 done += 1
                 if done % max(1, n // 20) == 0:
                     print(f"  {done}/{n} mocks done", flush=True)
+    ck.close()
     t_mocks = np.array([t_stat(per_mock[s]) for s in range(n)])
-    out = ROOT / "runs" / f"catalogue_lee_{len(CATALOGUE)}models_{n}mocks.txt"
-    out.parent.mkdir(exist_ok=True)
+    out = ROOT / "runs" / f"{stem}.txt"
     np.savetxt(out, t_mocks, header=f"T on w0wa mocks; real T = {t_real:.4f}")
     p = (t_mocks >= t_real).mean()
     print(f"T on mocks: median {np.median(t_mocks):.2f}, 95% {np.quantile(t_mocks, 0.95):.2f}, "

@@ -10,6 +10,8 @@ mocks must follow chi2(n - k): mean within 3 sigma of n - k and KS p > 0.01.
 
 Usage: python scripts/crossing_mock_test.py [n_mocks] [T1|T2]   (default 500, both)
 Writes runs/crossing_<truth>_<n>mocks.npz with every chi2 per mock and model.
+Crash-safe: every finished mock goes to runs/crossing_<truth>_<n>mocks.ckpt.jsonl; re-running
+the same command skips what is done.
 """
 
 import os
@@ -27,6 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from aicosmo.catalogue import CATALOGUE  # noqa: E402
+from aicosmo.checkpoint import Checkpoint  # noqa: E402
 from aicosmo.mocks import fiducial_vectors, make_mock  # noqa: E402
 from aicosmo.score import LCDM, W0WA, Data, score  # noqa: E402
 
@@ -64,12 +67,19 @@ def run(truth_key: str, n: int) -> None:
     print(f"[{truth_key}] {truth.name}: real S = {s_real:.2f}, "
           f"real dchi2(LCDM - w0wa) = {dchi2_real:.2f}", flush=True)
 
-    rows = []
+    ck = Checkpoint(ROOT / "runs" / f"crossing_{truth_key}_{n}mocks.ckpt.jsonl")
+    rows = [tuple(ck[str(s)]) for s in range(n) if str(s) in ck]
+    todo = [s for s in range(n) if str(s) not in ck]
+    print(f"  resuming: {len(rows)}/{n} mocks done", flush=True)
     with Pool(min(16, os.cpu_count()), initializer=_init, initargs=(truth_key,)) as pool:
-        for r in pool.imap_unordered(one, range(n), chunksize=1):
+        for r in pool.imap_unordered(one, todo, chunksize=1):
+            r = (int(r[0]), float(r[1]), int(r[2]), float(r[3]), float(r[4]), bool(r[5]),
+                 float(r[6]), float(r[7]))
+            ck.add(str(r[0]), list(r))
             rows.append(r)
             if len(rows) % max(1, n // 20) == 0:
                 print(f"  {len(rows)}/{n} mocks done", flush=True)
+    ck.close()
     rows.sort()
     seed, chi_t, k_t, chi_lc, chi_cp, cross, w0, wa = map(np.array, zip(*rows))
 

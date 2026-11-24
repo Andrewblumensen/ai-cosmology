@@ -39,6 +39,10 @@ did not happen.
 6. **Held-out data.** Where possible, search on one dataset and confirm on another
    (for example, search on Pantheon+ and confirm on DES-SN5YR).
 7. **Data is not committed.** `data/` is gitignored; `scripts/download_data.py` fetches it.
+8. **Every run longer than a few minutes must checkpoint.** Save each finished unit of work as it
+   completes (`src/aicosmo/checkpoint.py`) and skip finished units on restart, so a shutdown loses
+   at most the fits in flight. Never write results only at the end. (Session 13 lost a ~2 h
+   mock run to a planned shutdown because of this.)
 
 ## Promise reports
 

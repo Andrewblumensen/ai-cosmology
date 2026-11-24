@@ -8,9 +8,10 @@ Setup on a new machine: `uv venv --python 3.12 .venv`, `uv pip install -r requir
 `python scripts/download_data.py`. `runs/` is gitignored, so run outputs stay on the machine
 that made them.
 
-1. **Read the look-elsewhere result** of ID-035 batch 1: `runs/catalogue_lee_100.log` and
-   `runs/catalogue_lee_32models_100mocks.txt` (restarted 2026-11-24 19:01 on this machine;
-   ≈ 2 min per mock). Apply the pre-registered criterion: p < 0.01 for T_real = 2.07 →
+1. **Run (or resume) the look-elsewhere calibration** of ID-035 batch 1: `python scripts/catalogue_lee.py 100`
+   (now checkpointed; re-run the same command after any shutdown). Output:
+   `runs/catalogue_lee_32models_100mocks.txt`. The 2026-11-24 run reached 55/100 mocks and was
+   lost to a shutdown (no checkpoint then). ≈ 2 min per mock. Criterion: p < 0.01 for T_real = 2.07 →
    candidate; otherwise batch 1 found nothing beyond w0wa. Log it in IDEAS.md.
 2. **Batch 2 (ID-036) leaderboard is done** (best −2.002 vs w0wa, below batch 1's −2.07).
    Its look-elsewhere run (`python scripts/catalogue2_lee.py 100`, ≈ 7–8 h) is only needed
