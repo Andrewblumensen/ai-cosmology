@@ -4,20 +4,29 @@ Newest entries first. Every session ends by updating "Next up".
 
 ## Next up
 
-The user's direction (2026-11-24): research and unconventional cross-connections first;
-heavy evaluator work later; validate mainly against published research; only small,
-fast computations.
+1. **ID-032 (timescape check).** Highest-impact open lead from the old-literature track.
+   Implement timescape distances carefully from Wiltshire's papers (do not write
+   formulas from memory), pre-register, fit Pantheon+ with z-cuts, then add DESI BAO.
+2. **ID-031 (Baade-type audit).** Tabulate population-mixing risks in each ladder rung.
+3. **ID-026, ID-027, ID-021 (CMB-inclusive predictions)** as before.
+4. Keep using docs/history-lessons.md heavy-tail table when reporting significances.
 
-1. **Birefringence follow-up (ID-028 is covered by prior work).** The decisive tests are
-   future (LiteBIRD reionization tomography; ~10^5 radio galaxies). Remaining angle:
-   which existing large radio/VLBI catalogues could reach 10^5 jet+polarisation pairs?
-   Feasibility check only.
-2. **ID-026.** Check whether the JWST UV-luminosity-function excess grows with peak
-   height like an amplitude excess (needs published UVLF tables).
-3. **ID-027.** Full SN × BAO residual matrix (transverse vs radial).
-4. **ID-021.** CMB-inclusive DR3 predictions (needs a compressed CMB prior and
-   radiation in background.py).
-5. **ID-011.** Quantitative fingerprint (ΔH/H, Δσ8 per bin).
+## 2026-11-24 (session 5) — Old literature and cross-field track
+
+**Done**
+- `docs/history-lessons.md`: 18 historical tensions and how they resolved; base rate
+  roughly 1 in 4 to 1 in 3 became new physics; features that separated real from
+  spurious; scoring of today's core anomalies; heavy-tail recalibration (ID-030).
+- `docs/old-ideas.md`: C-field = phantom field; Dirac/Teller varying G dead (ID-029);
+  loitering parked; bulk viscosity known; timescape live (ID-032); Baade lesson (ID-031).
+
+**Learned**
+- Under realistic error tails, no current anomaly is decisive on its own (~2–3.5σ).
+- Evolving DE best matches the 1990s "mixed" age crisis: calibration fixes shrink it
+  while the independent leg (BAO+CMB) remains; the age crisis ended with Λ being real anyway.
+- H0 best matches the 1970s–90s "both camps partly wrong" pattern, which predicts a
+  middle value (~69–70); sound-horizon-free methods already sit there.
+- Cross-field: medicine/metrology meta-analysis tools apply directly to cosmology.
 
 ## 2026-11-24 (session 4) — Batch 3: fading-or-real, sky axes, cross-epoch, predictions
 

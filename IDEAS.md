@@ -3,9 +3,9 @@
 Every hypothesis, including failures. Never delete an entry: the counts are used to
 correct significances for the look-elsewhere effect.
 
-**Hypotheses tested on data or published numbers: 10** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025)
+**Hypotheses tested on data or published numbers: 12** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030)
 **Ideas screened against the literature only: 14** (table at the bottom)
-**Open ideas waiting for a test: 8** (ID-001, 002, 003, 010, 011, 021, 026, 027)
+**Open ideas waiting for a test: 10** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032)
 
 Status values: `proposed` · `parked` · `testing` · `dead` · `known` (prior art covers it) · `interesting` · `promising`
 
@@ -95,6 +95,28 @@ use only to confirm a finalist. (Decided 2026-11-24.)
   amplitude anomaly, linking it to the CMB lensing excess (two epochs, one cause).
 - Date: 2026-11-24
 
+### ID-032 — Independent check of the timescape claim (ln B > 5 on Pantheon+)
+- Status: proposed (from the old-literature track)
+- Origin: Claude (2026-11-24); idea lineage Einstein–Straus 1945 → Ellis 1984 → Buchert → Wiltshire
+- Idea: timescape replaces dark energy with backreaction of inhomogeneities and claims
+  very strong evidence over ΛCDM on Pantheon+, falling to ln B > 1 above z = 0.075
+  ([Seifert+ 2025](https://arxiv.org/abs/2412.15143); [talk 2026](https://indico.global/event/16070/contributions/144489/)).
+  Most of the preference therefore comes from low z, where peculiar-velocity
+  modelling dominates. Implement timescape distances from the original papers, refit
+  Pantheon+ with the standard likelihood and with z-cuts, then add DESI BAO.
+- If true, it would mean: dark energy is (partly) an averaging artefact. Very high impact.
+- Pre-registration: write the criterion before the first fit.
+- Date: 2026-11-24
+
+### ID-031 — Baade-type population-mixing audit of today's standard candles
+- Status: proposed
+- Idea: list every place a "standard" population could be two populations mixed
+  differently in calibrators vs targets (SN Ia progenitor channels vs z; Cepheid host
+  types; quasar sub-populations in dipole catalogues), and check which are tested.
+- If true, it would mean: a known historical error class (factor ~2 in 1952) applied
+  systematically. Highest relevance: the disputed SN progenitor-age bias.
+- Date: 2026-11-24
+
 ### ID-027 — Full SN × BAO residual correlation matrix
 - Status: proposed (generalises ID-005; the engine for ID-002)
 - Idea: for every redshift shell, compare SN and BAO residuals from a common fit,
@@ -103,6 +125,22 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 - Date: 2026-11-24
 
 ## Tested
+
+### ID-029 — Dirac/Teller varying G behind both a SN brightness drift and the faint young Sun
+- Status: **dead** (unless G varied in the past and froze recently)
+- Result: SN drift of 0.04 mag over 5 Gyr needs |Ġ/G| ≈ 4.9×10⁻¹² /yr (6.7σ from
+  LLR); the faint young Sun needs ≈ 2.5×10⁻¹² /yr (3.3σ). The only escape (G frozen today)
+  runs against DESI's suggestion that the DE field is moving today.
+- Code: `scripts/estimate_old_ideas.py`
+- Date: 2026-11-24
+
+### ID-030 — Today's tensions under empirically calibrated heavy-tailed errors
+- Status: **tested** (cross-field: metrology / meta-science)
+- Result: with errors ×1.5 or Student-t (ν = 3–10), every core anomaly falls to
+  ~2–3.5σ; H0 stays strongest (2.4–3.5σ). None is decisive alone. See
+  docs/history-lessons.md.
+- Code: `scripts/estimate_old_ideas.py`
+- Date: 2026-11-24
 
 ### ID-020 — Fading-or-real monitor
 - Status: **tested** (criterion pre-registered and committed before collecting numbers)
