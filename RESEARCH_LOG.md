@@ -8,14 +8,37 @@ The user's direction (2026-11-24): research and unconventional cross-connections
 heavy evaluator work later; validate mainly against published research; only small,
 fast computations.
 
-1. **ID-012 (DES as a common node).** Tabulate every DES vs non-DES probe result for
-   S8 and dark energy from published papers. Pre-register a criterion first.
-2. **ID-011 (sign-fingerprint matrix).** For each anomaly in docs/anomaly-map.md, write
-   the required sign of change in H(z) bins, growth bins, r_d, lensing amplitude.
-   Look for a consistent pattern.
-3. **ID-013.** Prior-art check on varying electron mass + dark-energy field + atomic clocks.
-4. **ID-010.** Turn "How the anomalies are connected" into an explicit graph.
-5. Generate a fresh batch of 10+ unconventional ideas and triage them the same way.
+1. **ID-020 (regression-to-the-mean monitor).** Collect release-by-release numbers for
+   the cosmic dipole (CatWISE versions), birefringence (WMAP→Planck→ACT) and H0
+   (SH0ES releases). Pre-register the criterion, then compare with expected growth.
+2. **ID-019.** Work out the growth-sign implied by the DM↔DE interaction pattern that
+   fakes phantom crossing; compare with docs/sign-fingerprint.md.
+3. **ID-011.** Make the fingerprint quantitative (ΔH/H and Δσ8 per redshift bin from
+   published reconstructions).
+4. **ID-021.** Draft the prediction registry for DESI DR3 (needs CMB info to be useful).
+5. Next idea batch: push harder on non-FLRW and parity-violating anomalies (dipole,
+   birefringence), which the background-expansion work cannot touch.
+
+## 2026-11-24 (session 3) — Idea batch 2: DES node, signal growth, quick kills
+
+**Done**
+- ID-012 (DES common node): dead. DES, KiDS, HSC agree; SN compilations converge at
+  3.2–3.4σ for evolving DE after recalibration. Updated anomaly map accordingly.
+- ID-016 (DR1→DR2 signal growth, Asimov test): signal-like but low power.
+- ID-017 (one axion for DE + birefringence + SN dimming): dead by many orders.
+- ID-018 (black holes cause CMB lensing excess): dead by 3–4 orders.
+- ID-013 (varying m_e + DE): already published.
+- First sign fingerprint: `docs/sign-fingerprint.md`.
+- New open ideas: ID-019 (interaction growth sign), ID-020 (regression monitor),
+  ID-021 (prediction registry).
+
+**Learned**
+- Evolving DE got *more* robust today in one sense: the SN samples now agree (3.2–3.4σ)
+  instead of spanning 2.8–4.2σ. S8 is fading. The cosmic dipole and birefringence
+  are the anomalies least explored by cross-connections, because no FLRW background
+  change can touch them.
+- Quick order-of-magnitude kills are cheap and effective; keep using them first.
+- Process slip: ID-012 was not pre-registered before seeing the deciding number.
 
 ## 2026-11-24 (session 2) — Anomaly map, idea triage, two quick tests
 

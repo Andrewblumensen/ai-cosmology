@@ -3,9 +3,9 @@
 Every hypothesis, including failures. Never delete an entry: the counts are used to
 correct significances for the look-elsewhere effect.
 
-**Hypotheses tested on data: 2** (ID-004, ID-005)
-**Ideas screened against the literature only: 10** (table at the bottom)
-**Open ideas waiting for a test: 7**
+**Hypotheses tested on data or published numbers: 6** (ID-004, 005, 012, 016, 017, 018)
+**Ideas screened against the literature only: 11** (table at the bottom)
+**Open ideas waiting for a test: 8**
 
 Status values: `proposed` · `parked` · `testing` · `dead` · `known` (prior art covers it) · `interesting` · `promising`
 
@@ -29,18 +29,36 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 
 ## Open ideas (highest priority first)
 
-### ID-012 — DES as a common node behind two anomalies
-- Status: proposed (top priority)
-- Origin: Claude, cross-anomaly bookkeeping (2026-11-24)
-- Idea: DES Y6 shows the S8 tension (2.4–2.7σ) while KiDS-Legacy does not (< 1σ). DES
-  supernovae gave the strongest dark-energy signal until a photometric recalibration
-  cut it from 4.2σ to 3.2σ. Test whether a shared DES-specific ingredient (photometric
-  calibration, photo-z calibration, a shared external low-z sample) links them.
-- If true, it would mean: two of the headline anomalies weaken together, and the
-  remaining signal is cleaner. That re-ranks what theorists should explain.
-- Pre-registered test: list every probe as DES / non-DES. Compare tension sizes per
-  group using published numbers. Criterion: TBD before running.
-- Data: published constraints (no heavy computation).
+### ID-020 — Regression-to-the-mean monitor for every anomaly
+- Status: proposed (high value, cheap)
+- Origin: Claude (2026-11-24), generalising ID-016
+- Idea: for each anomaly with several data releases (DESI DR1→DR2, CatWISE dipole
+  versions, SH0ES releases, birefringence WMAP→Planck→ACT), compare how the signal
+  changed with the change expected if the earlier best fit were true. Real effects
+  keep pace with precision; flukes and release-specific systematics fade.
+- If true, it would mean: an objective ranking of which anomalies behave like real
+  signals. That decides where all later effort goes.
+- Date: 2026-11-24
+
+### ID-021 — Public prediction registry for DESI DR3 and Euclid
+- Status: proposed
+- Origin: Claude (2026-11-24)
+- Idea: before the next data releases, commit to this repo the predictions each live
+  hypothesis makes (e.g. DR3 BAO values and errors if DR2's CPL fit is true, vs ΛCDM).
+  The git timestamp proves they came first.
+- If true, it would mean: confirmed predictions carry far more weight than fits to
+  existing data, especially from outside the field.
+- Date: 2026-11-24
+
+### ID-019 — Does the dark-sector interaction that fakes phantom crossing also fix or worsen S8?
+- Status: proposed
+- Origin: Claude, from the sign fingerprint (2026-11-24)
+- Idea: fits that explain DESI with a dark matter–dark energy interaction find energy
+  flowing DM→DE early and reversing later ([Guedezounme+ 2026](https://arxiv.org/abs/2507.18274)).
+  That pattern implies a definite change in late-time growth. Check its sign against
+  the clustering entries in docs/sign-fingerprint.md.
+- If true, it would mean: a fast consistency check that could kill or support a whole
+  model class.
 - Date: 2026-11-24
 
 ### ID-010 — Anomaly dependency graph
@@ -55,7 +73,8 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 - Date: 2026-11-24
 
 ### ID-011 — Sign-fingerprint matrix
-- Status: proposed
+- Status: testing (first version: docs/sign-fingerprint.md). Already exposes two
+  conflicts: evolving DE vs Hubble tension, and boosted-early / suppressed-late growth.
 - Origin: Claude (2026-11-24)
 - Idea: for each anomaly, write the sign of the change it needs in a few primitive
   quantities: H(z) in redshift bins, growth amplitude in bins, r_d, CMB lensing
@@ -86,18 +105,58 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 - Idea: generate many relations between observables that must hold in ΛCDM and test them all.
 - Date: 2026-11-24
 
-### ID-013 — Varying electron mass driven by the dark-energy field
-- Status: proposed (prior-art check not yet done)
-- Origin: Claude (2026-11-24)
-- Idea: a varying electron mass at recombination is one of the better-ranked H0
-  fixes. If the same scalar field is the evolving dark energy, its late-time motion
-  must also vary m_e today, which atomic clocks and quasar spectra constrain. Check
-  whether a single field can do both without breaking clock bounds.
-- If true, it would mean: one field linking the H0 tension and evolving dark energy,
-  with a lab-testable prediction.
+## Tested
+
+### ID-012 — DES as a common node behind two anomalies
+- Status: **dead**
+- Origin: Claude, cross-anomaly bookkeeping (2026-11-24)
+- Idea: a DES-specific ingredient links the DES Y6 S8 tension and the strong DES
+  supernova dark-energy signal.
+- Pre-registration: not done. I read DES's own consistency statement before writing a
+  criterion. Logged honestly; this counts as a tested hypothesis.
+- Result: DES Y6, KiDS-Legacy and HSC Y3 are consistent with each other and with the
+  CMB; DES Y6 differs from the CMB by 1.8σ in full parameter space (2.6σ along S8). On
+  the SN side, the shared ingredient across compilations is the low-z sample, not DES;
+  after recalibrations Pantheon+, DES-Dovekie and Union3.1 converge at 3.2–3.4σ.
+  Sources: [DES Y6](https://arxiv.org/abs/2601.14559),
+  [Union3.1](https://arxiv.org/abs/2601.19424),
+  [Vincenzi+ comparison](https://arxiv.org/pdf/2501.06664).
 - Date: 2026-11-24
 
-## Tested
+### ID-016 — Did DESI's dark-energy signal grow from DR1 to DR2 like a real signal?
+- Status: **tested: signal-like, but low power**
+- Origin: Claude (2026-11-24)
+- Pre-registered criterion: within 1σ of the Asimov expectation = signal-like.
+- Data: DESI DR1 and DR2 BAO + Pantheon+ (no CMB).
+- Result: Δχ²(ΛCDM − CPL) = 3.50 (DR1) → 4.86 (DR2). Expected for DR2 if DR1's best
+  fit were true: 4.51 ± 4.25. Observed − expected = +0.08σ: signal-like. But the test
+  barely discriminates (the expected spread is as large as the signal), and the best
+  fit moved toward ΛCDM in wa (-0.48 → -0.22). Needs CMB to gain power.
+- Code: `scripts/test_signal_growth_dr1_dr2.py`
+- Date: 2026-11-24
+
+### ID-017 — One axion for dark energy + birefringence + supernova dimming
+- Status: **dead** (order-of-magnitude)
+- Origin: Claude (2026-11-24)
+- Idea: a single axion-like field is the evolving dark energy, rotates CMB polarisation
+  (β = 0.34°), and dims supernovae by converting photons to axions in intergalactic
+  magnetic fields. That would break the distance-duality relation and could explain
+  the BAO–SN mismatch.
+- Result: a dark-energy-sized field excursion (0.1–1 M_pl) needs g ≈ 5×10⁻²¹–5×10⁻²⁰ GeV⁻¹
+  for the birefringence; that gives no measurable dimming. Dimming of ~0.04 mag needs
+  g ≈ 3×10⁻¹² GeV⁻¹ with nG fields, above the Chandra bound of 6–8×10⁻¹³
+  ([Reynolds+ 2020](https://arxiv.org/abs/1907.05475)). At the bound the dimming is
+  only ~0.001 mag. Dead on both arms.
+- Code: `scripts/estimate_quick_kills.py`
+- Date: 2026-11-24
+
+### ID-018 — Black-hole mass (LRDs, overmassive BHs) causes the CMB lensing excess
+- Status: **dead** (order-of-magnitude)
+- Result: Ω_BH ≈ 4×10⁻⁶, about 10⁻⁵ of all matter, and black holes sit inside
+  existing halos. The lensing excess is a few-percent effect. Short by 3–4 orders of
+  magnitude.
+- Code: `scripts/estimate_quick_kills.py`
+- Date: 2026-11-24
 
 ### ID-004 — Does the cosmic dipole anomaly leak into the dark-energy signal?
 - Status: **dead**
@@ -142,6 +201,7 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 | ID-008 | One scalar field drives both evolving DE and CMB birefringence | known | e.g. [Barman & Girmohanta 2026](https://journals.aps.org/prd/pdf/10.1103/169s-4g17) |
 | ID-009 | SN progenitor-age bias fakes evolving DE | known, disputed | [Son+ 2025](https://arxiv.org/pdf/2510.13121) vs [Wiseman+ 2026](https://arxiv.org/abs/2601.13785) |
 | ID-014 | DE density "peaks" at z ≈ 0.4, near matter–DE equality: a physical feedback? | parked | Crossing sits at the CPL pivot redshift, likely a parameterisation effect ([2607.01226](https://arxiv.org/pdf/2607.01226)) |
+| ID-013 | Varying electron mass + the dark-energy field together fix H0 and DESI | known | [Smith+ 2025](https://arxiv.org/abs/2510.21931): DE preference survives (≳2σ) with varying m_e; dilaton version in [2512.13544](https://arxiv.org/pdf/2512.13544v2) |
 | ID-015 | Dark matter–dark energy energy exchange makes phantom crossing only apparent | known | [Guedezounme+ 2026](https://arxiv.org/abs/2507.18274), many others |
 | — | JWST bright galaxies need new cosmology | parked | ΛCDM fits with rising star-formation efficiency ([Prada+ 2026](https://arxiv.org/html/2604.18683v1)) |
 | — | PTA amplitude needs new physics | parked | Largely resolved astrophysically ([Mingarelli+ 2026](https://arxiv.org/abs/2603.13643)) |

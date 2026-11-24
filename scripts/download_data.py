@@ -14,6 +14,10 @@ FILES = {
         f"{RAW}/desi_bao_dr2/desi_gaussian_bao_ALL_GCcomb_mean.txt",
         f"{RAW}/desi_bao_dr2/desi_gaussian_bao_ALL_GCcomb_cov.txt",
     ],
+    "desi_dr1_bao": [
+        f"{RAW}/desi_2024_gaussian_bao_ALL_GCcomb_mean.txt",
+        f"{RAW}/desi_2024_gaussian_bao_ALL_GCcomb_cov.txt",
+    ],
     "pantheon_plus": [
         f"{PP}/Pantheon%2BSH0ES.dat",
         f"{PP}/Pantheon%2BSH0ES_STAT%2BSYS.cov",

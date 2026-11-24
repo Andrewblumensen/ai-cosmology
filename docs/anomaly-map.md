@@ -8,9 +8,9 @@ its source. Update rows in place as new results appear; keep the date column hon
 
 | Anomaly | Current strength | Trend | Key source |
 | --- | --- | --- | --- |
-| **Evolving dark energy** (w0 > -1, wa < 0) | DESI DR2 + CMB 3.1σ; + SNe 2.8–4.2σ depending on SN sample. With the recalibrated DES-Dovekie SNe: 3.2σ (was 4.2σ), "weak Bayesian preference" | Weakening as SN calibration improves | [DESI DR2](https://arxiv.org/abs/2503.14738), [DES-Dovekie](https://arxiv.org/abs/2511.07517) |
+| **Evolving dark energy** (w0 > -1, wa < 0) | DESI DR2 + CMB 3.1σ; + SNe originally 2.8–4.2σ depending on SN sample. After SN recalibrations the samples **converge at 3.2–3.4σ** (Pantheon+ corrected 3.2σ, DES-Dovekie 3.4σ, Union3.1 3.4σ) | Converging: less sample-dependent, not gone | [DESI DR2](https://arxiv.org/abs/2503.14738), [DES-Dovekie](https://arxiv.org/abs/2511.07517), [Union3.1](https://arxiv.org/abs/2601.19424) |
 | **Hubble tension** (local H0 ≈ 73 vs CMB ≈ 67–68) | SH0ES 73.17 ± 0.86; CCHP lower; JWST confirms HST Cepheid distances | Persistent; debate is now SH0ES vs CCHP methods | [SH0ES JWST](https://ui.adsabs.harvard.edu/abs/2025AAS...24631002B/abstract), [Local Distance Network 2026](https://www.aanda.org/articles/aa/full_html/2026/04/aa57993-25/aa57993-25.html) |
-| **S8 tension** (less late-time clustering) | Split: DES Y6 2.4–2.7σ; KiDS-Legacy < 1σ | Becoming survey-specific | [S8 review 2026](https://arxiv.org/abs/2602.12238), [KiDS-Legacy](https://www.aanda.org/articles/aa/pdf/2025/11/aa54908-25.pdf) |
+| **S8 tension** (less late-time clustering) | DES Y6 2.6σ along S8 but 1.8σ in full parameter space; KiDS-Legacy < 1σ; DES, KiDS and HSC are consistent with each other | Fading | [DES Y6](https://arxiv.org/abs/2601.14559), [S8 review 2026](https://arxiv.org/abs/2602.12238), [KiDS-Legacy](https://www.aanda.org/articles/aa/pdf/2025/11/aa54908-25.pdf) |
 | **Negative neutrino mass** | Posterior peaks below zero when allowed; driven by excess CMB lensing plus the DESI/CMB H0·r_d mismatch | Robust across likelihoods | [Craig+ 2024](https://arxiv.org/abs/2407.07878), [Green & Meyers 2025](https://arxiv.org/abs/2508.20999) |
 | **Cosmic dipole anomaly** (quasar/radio dipole ≈ 2× kinematic) | CatWISE 4.9σ originally; reassessments 3.3–3.6σ; clustering does not explain it | Reduced but persistent | [von Hausegger+ 2026](https://arxiv.org/abs/2510.23769), [Bashir+ 2025](https://arxiv.org/abs/2511.00822) |
 | **Cosmic birefringence** (CMB polarisation rotated) | WMAP+Planck β = 0.34° ± 0.09°; ACT DR6 consistent, but ACT has unexplained systematics | Persistent, systematics-limited | [MPA 2026](https://www.mpa-garching.mpg.de/1137699/hl202602), [ACT DR6](https://journals.aps.org/prd/abstract/10.1103/pbc3-t52s) |
@@ -33,9 +33,10 @@ independent anomalies. Several share inputs or parameter directions.
   DR2, LRG1 and ELG1 are the biggest outliers, and LRG2 (z = 0.706) has the greatest
   bearing on w0 > -1 ([Ó Colgáin+ 2026](https://arxiv.org/abs/2504.04417)). LRG1 disagrees with supernovae
   at the same redshift (reproduced here, ID-005).
-- **DES is a common node.** DES Y6 shows the S8 tension while KiDS does not, and DES
-  supernovae gave the strongest dark-energy signal before recalibration. A shared
-  cause (photometric calibration, photo-z) is untested (ID-012).
+- **DES is not a common node (ID-012, dead).** DES Y6, KiDS-Legacy and HSC are mutually
+  consistent; the S8 gap is mild. The real shared ingredient of the SN compilations is
+  the low-z sample (> 90% of DES-SN5YR low-z SNe are in Pantheon+), and after
+  recalibration all compilations converge at 3.2–3.4σ for evolving DE.
 - **Cosmic dipole and supernova cosmology are linked by the choice of rest frame.**
   Tested today (ID-004): the frame choice does not move w0, wa by more than 0.5σ.
 
