@@ -5,7 +5,7 @@ correct significances for the look-elsewhere effect.
 
 **Hypotheses tested on data or published numbers: 47** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032; ID-035 batch 1: 32 models)
 **Ideas screened against the literature only: 15** (table at the bottom)
-**Open ideas waiting for a test: 11** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032, 034)
+**Open ideas waiting for a test: 12** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032, 034, 036)
 
 Status values: `proposed` · `parked` · `testing` · `dead` · `known` (prior art covers it) · `interesting` · `promising`
 
@@ -28,6 +28,47 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 ```
 
 ## Open ideas (highest priority first)
+
+### ID-036 — Idea factory, batch 2: mechanisms imported from other fields
+- Status: proposed; rules pre-registered 2026-11-24 (session 13) *before* the harvested ideas
+  were read; the model list is added to this entry and committed before any batch-2 model is
+  fitted to real data.
+- Origin: user + Claude. The user asked for a big batch of very non-human ideas from many fields.
+  Eight agents each harvested one field cluster (condensed matter, biology/ecology,
+  economics/control, information/thermodynamics, dynamics/signals, chemistry/particle kinetics,
+  geoscience/fluids, pure math/quantum foundations) into docs/batch2-harvest/*.md, each idea with
+  a cosmology story, a closed-form w(z) or ρ_DE(z), an impact note and a web-checked prior-art search.
+- If true, it would mean: a dark-energy history whose *shape* comes from a known mechanism in
+  another field (relaxation, saturation, log-periodicity, memory...) that the data prefer over
+  w0wa after the look-elsewhere correction: a lead with an interpretation, from outside the
+  usual cosmology toolbox.
+- **Pre-registered rules** (fixed before reading the harvest):
+  - Curation (done before any fit): drop exact duplicates of batch-1 models or of each other
+    (same function family up to reparametrisation); drop models that fail the sanity gate
+    (finite, positive DE density for 0 ≤ z ≤ 1100 at the start values, ΛCDM limit reproduced where
+    claimed: unit tests). Prior art found by the harvesters does not remove a model; it is
+    labelled "known" and still counts as a test.
+  - Parameter ranges are frozen when the catalogue is committed. A pathological best fit (flag in
+    src/aicosmo/score.py) is reported as failed; a repaired version is a new hypothesis in a
+    later batch (lesson from Padé thawing, ID-035).
+  - Before the commit, no χ² of any batch-2 model on real data is computed (tests only evaluate
+    w(z) or ρ_DE(z)). Smoke tests run on a ΛCDM mock, never on real data.
+  - Data and fitting identical to ID-035: DESI DR2 BAO + CMB (θ*, ω_b, ω_bc) + Pantheon+, best
+    fit with 4 starts, ΔAIC vs w0wa.
+  - *interesting*: a non-pathological model with ΔAIC ≤ −2 vs w0wa.
+  - *promising* needs all of: (1) look-elsewhere over **batch 1 + batch 2**: T_all = −min over
+    all models of ΔAIC(model − w0wa) on the real data is exceeded in < 1% of the same 100 w0wa
+    mocks as ID-035 (seeds 0–99; T_all per mock = max of the batch-1 and batch-2 values);
+    (2) a physical interpretation, not just a shape; (3) ΔAIC ≤ −2 holds with DES-SN5YR replacing
+    Pantheon+ (finalist only, once).
+  - Secondary: best non-crossing (w ≥ −1, z ≤ 3) model vs w0wa; feeds ID-034 only as a new,
+    separately pre-registered truth.
+  - Expectation written in advance: these data fix only 2–3 numbers of w(z), so most models will
+    land within ±2 AIC of w0wa; a win needs the right shape with fewer parameters. The more models,
+    the larger T gets on mocks by chance; the look-elsewhere step is what decides.
+  - Hypothesis count: every scored model counts as one test.
+- Data: as ID-035. Code: src/aicosmo/catalogue2.py (to be written), scripts/run_catalogue.py.
+- Date: 2026-11-24
 
 ### ID-035 — Idea factory, batch 1: score many expansion histories, mock-calibrated
 - Status: testing (pre-registered 2026-11-24, session 12, before the full batch was scored)
@@ -103,7 +144,44 @@ use only to confirm a finalist. (Decided 2026-11-24.)
   identical search on ΛCDM mocks to get the false-alarm distribution.
 - If true, it would mean: a data-preferred expansion history no human wrote down, with a
   calibrated significance.
-- Date: 2026-11-24
+- **Pre-registration, part A: is the phantom crossing real?** (written 2026-11-24, session 13,
+  before any computation for it; the ID-035 look-elsewhere run was going in the background)
+  - Question: if the truth were a model that never crosses w = −1, how often would the data
+    still prefer w0wa (which crosses) as strongly as the real data do?
+  - Data: DESI DR2 BAO + CMB (θ*, ω_b, ω_bc) + Pantheon+, as in ID-035. DES-SN5YR stays held out.
+  - Truths, fixed now from the batch-1 leaderboard (docs/catalogue-leaderboard.md):
+    - **T1** = best model with w ≥ −1 at all z ≤ 3 and no pathology flag: Dutta–Scherrer/Linder
+      thawing (1 parameter). Real data: χ²(T1) − χ²(w0wa) = 4.96.
+    - **T2** = best model that never crosses, of any kind: running vacuum (ν). Its effective w
+      stays below −1 (min −1.26) and never crosses. Real data: χ²(T2) − χ²(w0wa) = 2.53.
+    - A better non-crossing model from batch 2 (ID-036) does **not** replace T1/T2; it would be a
+      separate, separately pre-registered test.
+  - Mocks: each truth at its best fit to the real data (parametric bootstrap), N = 500 mocks per
+    truth, seeds 0–499, src/aicosmo/mocks.py. On every mock fit the truth, ΛCDM and w0wa
+    (starts = 4, same fitter as ID-035). Save every χ² per mock and model, not only the statistic.
+  - Validation gate (must pass before any statistic is read): on each truth's mocks, the mean
+    χ²_min(truth) is within 3σ of n − k and a KS test against χ²(n − k) gives p > 0.01. If it fails,
+    stop and debug; nothing from that run is reported as a result.
+  - Primary statistic per truth: S = χ²_min(truth) − χ²_min(w0wa); p = fraction of mocks with
+    S ≥ the real value (4.96 for T1, 2.53 for T2).
+    - p < 0.01: that truth is rejected in favour of a crossing history (the crossing is not a
+      parametrisation artefact of it).
+    - p ≥ 0.05: that truth explains the data's preference for w0wa (crossing consistent with an artefact).
+    - 0.01 ≤ p < 0.05: inconclusive, reported as such.
+  - Secondary (reported, not used for the verdict): fraction of mocks where the w0wa best fit
+    crosses −1 for z ≤ 3 *and* Δχ²(ΛCDM − w0wa) ≥ 7.60 (the real value); scatter of the mock
+    (w0, wa) best fits against the real (−0.853, −0.524).
+  - Expectation, written down so it cannot be claimed as a surprise later: the naive Wilks
+    χ² (1 dof) tail gives p ≈ 0.026 (T1) and 0.11 (T2). The models are not nested, so Wilks need
+    not hold; that is why mocks are used.
+  - Caveats fixed in advance: compressed CMB without lensing makes the scorer ≈ 3 in χ²
+    conservative (session 10); a "rejected" T1 therefore holds with our data, not necessarily
+    the strongest published combination.
+  - Hypothesis count: +2 (one per truth) once run.
+  - Cost: 3 fits × 500 mocks × 2 truths ≈ 3000 fits, about the size of the ID-035 look-elsewhere
+    run (≈ 3 h on 16 cores). Run only after that finishes. Code: scripts/crossing_mock_test.py
+    (to be written).
+- Date: 2026-11-24 (part A pre-registered in session 13)
 
 ### ID-021 — Public prediction registry for DESI DR3 and Euclid
 - Status: first entry committed: `docs/predictions/desi-final-bao.md` (no-CMB version;
