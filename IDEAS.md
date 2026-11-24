@@ -3,7 +3,7 @@
 Every hypothesis, including failures. Never delete an entry: the counts are used to
 correct significances for the look-elsewhere effect.
 
-**Hypotheses tested on data or published numbers: 12** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030)
+**Hypotheses tested on data or published numbers: 13** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032)
 **Ideas screened against the literature only: 14** (table at the bottom)
 **Open ideas waiting for a test: 10** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032)
 
@@ -96,7 +96,22 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 - Date: 2026-11-24
 
 ### ID-032 — Independent check of the timescape claim (ln B > 5 on Pantheon+)
-- Status: proposed (from the old-literature track)
+- Status: **tested: does not reproduce** (pre-registered; see Result below). Moved to
+  "partly open": the remaining disagreement is about likelihood and velocity treatment.
+- Result (standard Pantheon+ likelihood, zHD): Δχ²(ΛCDM − timescape) = −5.13, −5.05,
+  −2.06 for z_min = 0.01, 0.033, 0.075, i.e. ΛCDM fits better at every cut. Best-fit
+  f_v0 = 0.86, 0.83, 0.79 (inside Wiltshire's published 0.76 +0.12/−0.09). ΛCDM Ωm = 0.332
+  matches Pantheon+'s published value, validating the pipeline. Implementation check:
+  low-z slope reproduces the dressed H0 of eq. B9 to 0.04%.
+- Exploratory, NOT pre-registered and not counted: with zCMB (no peculiar-velocity
+  corrections) or zHEL, timescape wins only at z_min = 0.01 (Δχ² +0.8 and +3.6);
+  above z = 0.033 ΛCDM wins in every frame (−1.2 to −3.6). So any timescape preference
+  lives in the lowest-redshift SNe, where velocity modelling dominates, which is the
+  same place the published ln B shrinks (ln B > 5 overall → > 1 above z = 0.075).
+- Caveats: Seifert+ use a light-curve-level Bayesian likelihood, not ours; Pantheon+
+  bias corrections were simulated in ΛCDM, which could disadvantage alternatives.
+  Next: add DESI BAO with timescape's own geometry (needs its sound-horizon treatment).
+- Code: `src/aicosmo/timescape.py`, `scripts/test_timescape.py` (`--explore` for frames)
 - Origin: Claude (2026-11-24); idea lineage Einstein–Straus 1945 → Ellis 1984 → Buchert → Wiltshire
 - Idea: timescape replaces dark energy with backreaction of inhomogeneities and claims
   very strong evidence over ΛCDM on Pantheon+, falling to ln B > 1 above z = 0.075

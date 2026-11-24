@@ -4,12 +4,27 @@ Newest entries first. Every session ends by updating "Next up".
 
 ## Next up
 
-1. **ID-032 (timescape check).** Highest-impact open lead from the old-literature track.
-   Implement timescape distances carefully from Wiltshire's papers (do not write
-   formulas from memory), pre-register, fit Pantheon+ with z-cuts, then add DESI BAO.
-2. **ID-031 (Baade-type audit).** Tabulate population-mixing risks in each ladder rung.
-3. **ID-026, ID-027, ID-021 (CMB-inclusive predictions)** as before.
-4. Keep using docs/history-lessons.md heavy-tail table when reporting significances.
+1. **ID-031 (Baade-type audit)**: tabulate population-mixing risks per ladder rung; the
+   SN progenitor-age dispute is the top case.
+2. **ID-032 follow-up**: timescape + DESI BAO with its own sound-horizon treatment
+   (read Heinesen et al. on timescape BAO first), and a z-cut scan of where the
+   timescape-vs-ΛCDM difference comes from.
+3. **ID-026, ID-027, ID-021 (CMB-inclusive predictions)**.
+
+## 2026-11-24 (session 6) — Timescape check (ID-032)
+
+**Done**
+- Implemented the timescape tracker solution from Wiltshire 2009 (eqs. 38–41, B9),
+  verified against the paper's own dressed-H0 relation (0.04%).
+- Pre-registered and ran the Pantheon+ comparison: **does not reproduce**. ΛCDM beats
+  timescape by Δχ² = 5.1 / 5.1 / 2.1 at z_min = 0.01 / 0.033 / 0.075.
+- Exploratory frames: timescape gains only at the lowest-z cut without velocity
+  corrections; ΛCDM wins above z = 0.033 in every frame.
+
+**Learned**
+- The timescape preference, where it exists, is a low-redshift, velocity-treatment
+  effect. The decisive question is how peculiar velocities are modelled, not the
+  high-z expansion history.
 
 ## 2026-11-24 (session 5) — Old literature and cross-field track
 
