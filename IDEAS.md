@@ -158,6 +158,14 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 - If true, it would mean: a known historical error class (factor ~2 in 1952) applied
   systematically. Highest relevance: the disputed SN progenitor-age bias.
 - Date: 2026-11-24
+- **ID-031a pre-registration (2026-11-24, before computing):** Pantheon+ (z > 0.01,
+  non-calibrators, HOST_LOGMASS valid), residuals from the joint DESI DR2 BAO + Pantheon+
+  flat-ΛCDM fit, full STAT+SYS covariance. In redshift bins [0.01, 0.1), [0.1, 0.3),
+  [0.3, 0.6), [0.6, 2.3) fit residual = a_bin + s_bin·[logM > 10] by generalised least
+  squares. Then fit s(z) = s0 + s1·z across bins. "Evidence of an evolving
+  population effect" if |s1| > 2σ; "none" otherwise. Also report how the high-mass
+  fraction changes with z and the implied magnitude drift
+  Δm(z) = s1·z·(high-mass fraction), compared with the ~0.04 mag needed to matter for DE.
 
 ### ID-027 — Full SN × BAO residual correlation matrix
 - Status: proposed (generalises ID-005; the engine for ID-002)
