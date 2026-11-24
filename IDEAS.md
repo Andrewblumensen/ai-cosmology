@@ -3,7 +3,7 @@
 Every hypothesis, including failures. Never delete an entry: the counts are used to
 correct significances for the look-elsewhere effect.
 
-**Hypotheses tested on data or published numbers: 13** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032)
+**Hypotheses tested on data or published numbers: 14** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032)
 **Ideas screened against the literature only: 14** (table at the bottom)
 **Open ideas waiting for a test: 10** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032)
 
@@ -96,8 +96,8 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 - Date: 2026-11-24
 
 ### ID-032 — Independent check of the timescape claim (ln B > 5 on Pantheon+)
-- Status: **tested: does not reproduce** (pre-registered; see Result below). Moved to
-  "partly open": the remaining disagreement is about likelihood and velocity treatment.
+- Status: **tested: does not reproduce on SNe; disfavoured when DESI BAO are added**
+  (both pre-registered; see results below).
 - Result (standard Pantheon+ likelihood, zHD): Δχ²(ΛCDM − timescape) = −5.13, −5.05,
   −2.06 for z_min = 0.01, 0.033, 0.075, i.e. ΛCDM fits better at every cut. Best-fit
   f_v0 = 0.86, 0.83, 0.79 (inside Wiltshire's published 0.76 +0.12/−0.09). ΛCDM Ωm = 0.332
@@ -121,6 +121,15 @@ use only to confirm a finalist. (Decided 2026-11-24.)
   Δχ² ≤ −4 in B; otherwise "inconclusive". (C) Robustness, reported but not used for
   the verdict: add a 1% systematic in quadrature to each BAO error (AP-scaling
   accuracy for non-fiducial models, Heinesen+ 2020).
+- **ID-032b result: timescape disfavoured** (pre-registered rule). Δχ²(ΛCDM − TS):
+  (A) BAO alone −4.6; (B) BAO + Pantheon+ **−29.0**. Robustness with +1% BAO systematic:
+  −1.6 and −25.0. Cause: one void fraction cannot fit both probes. Supernovae want
+  f_v0 ≈ 0.79–0.86, BAO want ≈ 0.69; the compromise fails both. Largest timescape pulls:
+  Lyman-α D_H at z = 2.33 (−2.3σ) and D_H at z = 0.93 (+2.3σ). Caveats: the D_H = dD/dz
+  mapping and DESI's ΛCDM-fiducial AP compression are assumptions; a full timescape
+  BAO re-analysis of the galaxy correlation function could change the BAO-alone number,
+  but a 25–29 Δχ² gap in the joint fit is large.
+  Code: `scripts/test_timescape_bao.py`
 - Code: `src/aicosmo/timescape.py`, `scripts/test_timescape.py` (`--explore` for frames)
 - Origin: Claude (2026-11-24); idea lineage Einstein–Straus 1945 → Ellis 1984 → Buchert → Wiltshire
 - Idea: timescape replaces dark energy with backreaction of inhomogeneities and claims

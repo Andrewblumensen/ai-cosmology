@@ -4,12 +4,18 @@ Newest entries first. Every session ends by updating "Next up".
 
 ## Next up
 
-1. **ID-031 (Baade-type audit)**: tabulate population-mixing risks per ladder rung; the
-   SN progenitor-age dispute is the top case.
-2. **ID-032 follow-up**: timescape + DESI BAO with its own sound-horizon treatment
-   (read Heinesen et al. on timescape BAO first), and a z-cut scan of where the
-   timescape-vs-ΛCDM difference comes from.
-3. **ID-026, ID-027, ID-021 (CMB-inclusive predictions)**.
+1. **ID-031 (Baade-type audit)**: population-mixing risks per ladder rung; SN
+   progenitor-age dispute first.
+2. **ID-026, ID-027, ID-021 (CMB-inclusive predictions)**.
+3. Optional ID-032c: ask the timescape authors' published BAO treatment (Heinesen+)
+   whether D_H = dD/dz is the right mapping; rerun if not.
+
+## 2026-11-24 (session 7) — Timescape + DESI BAO (ID-032b)
+
+- Pre-registered, then fitted. Timescape disfavoured: Δχ²(ΛCDM − TS) = −4.6 (BAO alone),
+  −29.0 (BAO + Pantheon+); −1.6 / −25.0 with a 1% BAO systematic.
+- Mechanism: supernovae and BAO require different void fractions (≈0.8 vs ≈0.69).
+- First timescape fit to DESI DR2 BAO that I could find; assumptions logged.
 
 ## 2026-11-24 (session 6) — Timescape check (ID-032)
 

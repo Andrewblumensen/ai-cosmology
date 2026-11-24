@@ -55,3 +55,19 @@ class Timescape:
         """Comoving-type distance D(z) = (1+z) d_A in units of c/H0_dressed,
         the same role as Background.chi for the supernova likelihood."""
         return np.interp(z, self._z, self._D)
+
+    # --- BAO observables (ID-032b assumptions: D_M = D, D_H = dD/dz) ---
+    # hrd plays the same role as for FLRW: a free scale c/(H0 r_d) absorbs H0 and r_d.
+
+    def _dDdz(self, z):
+        return np.interp(z, self._z, np.gradient(self._D, self._z))
+
+    def dm_over_rd(self, z, hrd):
+        return 299_792.458 / (100.0 * hrd) * self.chi(z)
+
+    def dh_over_rd(self, z, hrd):
+        return 299_792.458 / (100.0 * hrd) * self._dDdz(z)
+
+    def dv_over_rd(self, z, hrd):
+        z = np.asarray(z, dtype=float)
+        return np.cbrt(z * self.dm_over_rd(z, hrd) ** 2 * self.dh_over_rd(z, hrd))
