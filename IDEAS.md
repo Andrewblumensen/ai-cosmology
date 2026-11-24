@@ -3,7 +3,7 @@
 Every hypothesis, including failures. Never delete an entry: the counts are used to
 correct significances for the look-elsewhere effect.
 
-**Hypotheses tested on data or published numbers: 47** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032; ID-035 batch 1: 32 models)
+**Hypotheses tested on data or published numbers: 123** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032; ID-035 batch 1: 32 models; ID-036 batch 2: 76 models)
 **Ideas screened against the literature only: 15** (table at the bottom)
 **Open ideas waiting for a test: 12** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032, 034, 036)
 
@@ -30,7 +30,7 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 ## Open ideas (highest priority first)
 
 ### ID-036 — Idea factory, batch 2: mechanisms imported from other fields
-- Status: proposed; rules pre-registered 2026-11-24 (session 13) *before* the harvested ideas
+- Status: testing (leaderboard done: best −2.002, "interesting" by a hair; look-elsewhere pending). Rules pre-registered 2026-11-24 (session 13) *before* the harvested ideas
   were read; the model list is added to this entry and committed before any batch-2 model is
   fitted to real data.
 - Origin: user + Claude. The user asked for a big batch of very non-human ideas from many fields.
@@ -71,6 +71,22 @@ use only to confirm a finalist. (Decided 2026-11-24.)
   in src/aicosmo/catalogue2.py, from 83 harvested ideas (7 exact duplicates merged; 10 labelled
   "known"). Curation record, merges, one formula bug fixed and three start values moved:
   docs/batch2-curation.md. All pass tests/test_catalogue2.py. Ranges are now frozen.
+- **Result, leaderboard (2026-11-24, session 13)**, docs/catalogue2-leaderboard.md, 76 models,
+  none failed to fit:
+  - Best: "Adler phase-slip heartbeat DE" (biology) ΔAIC −2.002 vs w0wa (Δχ² −6.00, k = 7):
+    meets *interesting* by 0.002 and has no pathology flag, but two parameters sit on their range
+    edges (K = 15, x0 = −3) and w dips to −4.5: the fit wants a spikier shape than the range
+    allows. Next: Adler ghost-bottleneck −1.05, Lorentz resonance −1.03, pharmacokinetic sawtooth
+    −0.66, double-descent peak −0.12, PID step response 0.00. 6 models beat w0wa in AIC.
+  - **No model beats batch 1's best (tanh step, −2.07).** So T_all on the real data stays 2.07,
+    while T on mocks can only grow with more models: the combined look-elsewhere p cannot be
+    smaller than batch 1's. If ID-035's p ≥ 0.01, batch 2 cannot be *promising* either, and the
+    7–8 h batch-2 look-elsewhere run is not needed for the verdict.
+  - Every model that beats ΛCDM by more than 2 in AIC crosses w = −1. All emergent/thawing-type
+    shapes (onset with an exponent, relaxation, saturation, staircases without crossing) are
+    +4.6 to +10.5 worse than w0wa. Confirms ID-035: the data want a crossing, oscillation-like shape.
+  - 9 best fits carry a pathology flag (pole/jump in w) and are disqualified.
+  - Hypothesis count +76.
 - Data: as ID-035. Code: src/aicosmo/catalogue2.py, scripts/run_catalogue2.py (leaderboard),
   scripts/catalogue2_lee.py (look-elsewhere, combined with batch 1 on the same seeds).
 - Date: 2026-11-24

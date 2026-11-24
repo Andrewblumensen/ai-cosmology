@@ -12,9 +12,9 @@ that made them.
    `runs/catalogue_lee_32models_100mocks.txt` (restarted 2026-11-24 19:01 on this machine;
    ≈ 2 min per mock). Apply the pre-registered criterion: p < 0.01 for T_real = 2.07 →
    candidate; otherwise batch 1 found nothing beyond w0wa. Log it in IDEAS.md.
-2. **Score batch 2 (ID-036)**: `python scripts/run_catalogue2.py` (≈ 5 min) →
-   docs/catalogue2-leaderboard.md. Then, only after step 1's file exists,
-   `python scripts/catalogue2_lee.py 100` (≈ 7–8 h on 16 cores). Criteria are frozen in IDEAS.md.
+2. **Batch 2 (ID-036) leaderboard is done** (best −2.002 vs w0wa, below batch 1's −2.07).
+   Its look-elsewhere run (`python scripts/catalogue2_lee.py 100`, ≈ 7–8 h) is only needed
+   if step 1 gives p < 0.01: otherwise batch 2 cannot pass either (see IDEAS.md, ID-036).
 3. **ID-034 part A** (pre-registered): `python scripts/crossing_mock_test.py` (500 mocks per
    truth, ≈ 3 h). Check the validation gate first.
 4. Later: the 33 "needs ODE" ideas at the end of docs/batch2-harvest/*.md need a small ODE
@@ -39,7 +39,12 @@ that made them.
   the look-elsewhere step will decide, not the leaderboard.
 - Tests caught one harvested formula bug before any fit (SIR final size used the wrong Lambert W
   branch). Three start values moved so they pass the sanity gate; ranges unchanged.
-- No model fitted to real data; hypothesis count unchanged (47).
+- Frozen catalogue committed and pushed, *then* scored (look-elsewhere run paused for it).
+- **Result:** best is "Adler phase-slip heartbeat" (biology), ΔAIC −2.002 vs w0wa: "interesting"
+  by 0.002, with two parameters on their range edges. Nothing beats batch 1's tanh step (−2.07),
+  so batch 2 cannot change the look-elsewhere verdict. The top six are all oscillating or
+  resonant shapes that cross −1; every non-crossing shape is 4.6–10.5 worse than w0wa.
+  Not promising. Hypothesis count 47 → 123.
 
 ## 2026-11-24 (session 12) — Idea factory, batch 1 (ID-035)
 
