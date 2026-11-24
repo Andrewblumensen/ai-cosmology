@@ -111,6 +111,16 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 - Caveats: Seifert+ use a light-curve-level Bayesian likelihood, not ours; Pantheon+
   bias corrections were simulated in ΛCDM, which could disadvantage alternatives.
   Next: add DESI BAO with timescape's own geometry (needs its sound-horizon treatment).
+- **ID-032b pre-registration (2026-11-24, before fitting):** DESI DR2 BAO under
+  timescape. Assumptions stated in advance: D_M = dressed comoving distance D(z);
+  D_H = dD/dz; D_V = (z D_M² D_H)^(1/3); the sound horizon is free (absorbed in one
+  scale parameter, as h·r_d is for ΛCDM), so each model has 2 free parameters on BAO
+  alone and the same count jointly with Pantheon+ (M marginalised).
+  (A) BAO alone, (B) BAO + Pantheon+ (zHD, z > 0.01). Δχ² = χ²(ΛCDM) − χ²(timescape).
+  "Timescape favoured" if Δχ² ≥ 4 in both A and B; "timescape disfavoured" if
+  Δχ² ≤ −4 in B; otherwise "inconclusive". (C) Robustness, reported but not used for
+  the verdict: add a 1% systematic in quadrature to each BAO error (AP-scaling
+  accuracy for non-fiducial models, Heinesen+ 2020).
 - Code: `src/aicosmo/timescape.py`, `scripts/test_timescape.py` (`--explore` for frames)
 - Origin: Claude (2026-11-24); idea lineage Einstein–Straus 1945 → Ellis 1984 → Buchert → Wiltshire
 - Idea: timescape replaces dark energy with backreaction of inhomogeneities and claims
