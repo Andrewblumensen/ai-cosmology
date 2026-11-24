@@ -160,7 +160,8 @@ use only to confirm a finalist. (Decided 2026-11-24.)
     truth, seeds 0–499, src/aicosmo/mocks.py. On every mock fit the truth, ΛCDM and w0wa
     (starts = 4, same fitter as ID-035). Save every χ² per mock and model, not only the statistic.
   - Validation gate (must pass before any statistic is read): on each truth's mocks, the mean
-    χ²_min(truth) is within 3σ of n − k and a KS test against χ²(n − k) gives p > 0.01. If it fails,
+    χ²_min(truth) is within 3σ of n − k − 1 and a KS test against χ²(n − k − 1) gives p > 0.01
+    (the −1 is the SN absolute magnitude, profiled out analytically; clarified before any run). If it fails,
     stop and debug; nothing from that run is reported as a result.
   - Primary statistic per truth: S = χ²_min(truth) − χ²_min(w0wa); p = fraction of mocks with
     S ≥ the real value (4.96 for T1, 2.53 for T2).
