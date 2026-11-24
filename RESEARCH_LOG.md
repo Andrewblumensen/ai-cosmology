@@ -4,10 +4,30 @@ Newest entries first. Every session ends by updating "Next up".
 
 ## Next up
 
-1. **ID-031b**: an age-based (not mass-based) version of the population test needs host
-   ages; check whether Union3.1 / DES host-age catalogues are public.
-2. **ID-021**: CMB-inclusive DESI DR3 predictions (add radiation + compressed CMB prior).
-3. **ID-026, ID-027** as before.
+**Read `docs/strategy-2026-11-24.md` first.** A change of approach was proposed and is
+awaiting the user's go-ahead: move from hand-checked idea batches to machine-scored search.
+
+1. **If approved — ID-033**: re-score a catalogue of published DE / H0 models on DESI DR2
+   BAO + Pantheon+. Steps: (a) choose the catalogue source and list the models with
+   closed-form H(z) or w(z); (b) write and commit the pre-registration (penalty, threshold
+   vs w0wa, look-elsewhere correction); (c) build a generic scorer in src/aicosmo/ on top
+   of bao.py and sn.py; (d) score and log.
+2. **ID-034** (after 033): evolutionary symbolic H(z) search plus a ΛCDM-mock false-alarm run.
+3. Older queue, lower priority: ID-031b (host ages), ID-021 (CMB-inclusive DR3
+   predictions), ID-026, ID-027, optional ID-032c.
+
+## 2026-11-24 (session 9) — Strategy rethink from AI-math results (no computation)
+
+- Reviewed how AI + humans attacked hard math in 2025–26: Navier–Stokes (OpenAI's forced
+  blow-up claim, Lean-checked, still contested; Buckmaster–Alpöge; DeepMind unstable
+  singularities), Erdős problems (mostly literature search), AlphaEvolve.
+- **Learned:** the wins came from massive search in which every candidate is scored by a
+  machine, not from better ideas. Our 8 sessions were hand-checked idea batches (15
+  tested, 0 promising). The feasibility study's automated-search plan, which we set
+  aside, is the missing piece.
+- Proposed ID-033 (re-score published models on DR2) and ID-034 (evolutionary symbolic
+  search with mock calibration). Written up in docs/strategy-2026-11-24.md.
+- Nothing was tested, so the hypothesis counts are unchanged.
 
 ## 2026-11-24 (session 8) — Baade-type audit (ID-031, 031a)
 

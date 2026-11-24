@@ -5,7 +5,7 @@ correct significances for the look-elsewhere effect.
 
 **Hypotheses tested on data or published numbers: 15** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032)
 **Ideas screened against the literature only: 14** (table at the bottom)
-**Open ideas waiting for a test: 10** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032)
+**Open ideas waiting for a test: 12** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032, 033, 034)
 
 Status values: `proposed` · `parked` · `testing` · `dead` · `known` (prior art covers it) · `interesting` · `promising`
 
@@ -28,6 +28,31 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 ```
 
 ## Open ideas (highest priority first)
+
+### ID-033 — Re-score the catalogue of published models on DESI DR2 (+ Pantheon+)
+- Status: proposed (awaiting user go-ahead; see docs/strategy-2026-11-24.md)
+- Origin: Claude, from the Erdős-problems lesson (2026-11-24)
+- Idea: many published dark-energy / H0-tension models were fitted only to pre-DESI
+  data. Build a catalogue of models that have closed-form H(z) or w(z) (start from H0
+  and DE review compilations), implement each, and score all of them on DESI DR2 BAO +
+  Pantheon+ (later + compressed CMB) with an Occam penalty (AIC/BIC; evidence for finalists).
+- If true, it would mean: forgotten models that beat w0wa with a physical theory behind
+  them, i.e. leads that come with an interpretation. If none do, that is a strong
+  statement about the model space.
+- Pre-registered test and success criterion: to be written before scoring (which
+  catalogue, penalty, threshold vs w0wa; look-elsewhere correction over the catalogue size).
+- Data: DESI DR2 BAO, Pantheon+ (DES-SN5YR held out for finalists).
+- Date: 2026-11-24
+
+### ID-034 — Evolutionary symbolic search over expansion histories, calibrated on mocks
+- Status: proposed (after ID-033; reuses its scorer)
+- Origin: Claude, from the AlphaEvolve pattern; = the feasibility study's original plan
+- Idea: evolve compact symbolic H(z)/w(z) forms with an LLM mutation step. Score with
+  the likelihoods plus physicality constraints and a complexity penalty. Run the
+  identical search on ΛCDM mocks to get the false-alarm distribution.
+- If true, it would mean: a data-preferred expansion history no human wrote down, with a
+  calibrated significance.
+- Date: 2026-11-24
 
 ### ID-021 — Public prediction registry for DESI DR3 and Euclid
 - Status: first entry committed: `docs/predictions/desi-final-bao.md` (no-CMB version;
