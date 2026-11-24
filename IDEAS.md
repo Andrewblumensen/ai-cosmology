@@ -4,7 +4,7 @@ Every hypothesis, including failures. Never delete an entry: the counts are used
 correct significances for the look-elsewhere effect.
 
 **Hypotheses tested on data or published numbers: 15** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032)
-**Ideas screened against the literature only: 14** (table at the bottom)
+**Ideas screened against the literature only: 15** (table at the bottom)
 **Open ideas waiting for a test: 11** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032, 034)
 
 Status values: `proposed` · `parked` · `testing` · `dead` · `known` (prior art covers it) · `interesting` · `promising`
@@ -389,6 +389,7 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 | — | PTA amplitude needs new physics | parked | Largely resolved astrophysically ([Mingarelli+ 2026](https://arxiv.org/abs/2603.13643)) |
 | — | Negative neutrino mass is excess lensing | known | [Craig+ 2024](https://arxiv.org/abs/2407.07878), [Green & Meyers 2025](https://arxiv.org/abs/2508.20999) |
 | — | Local bulk flow / dipole explains acceleration | known, contested | [Rameez 2024](https://arxiv.org/abs/2411.14758) vs [Rubin & Heitlauf 2020](https://par.nsf.gov/servlets/purl/10273965) |
+| ID-033 | Re-score a catalogue of DE parametrisations on DESI DR2 | known | [Lodha+ 2025](https://arxiv.org/abs/2503.14743), [Chaudhary+ 2025](https://arxiv.org/abs/2508.10514), [Malekjani+ 2025](https://arxiv.org/abs/2511.18657); see docs/literature-dr2-rescoring.md |
 
 ## Archived open-idea entries (moved after testing; pre-registrations kept verbatim)
 
