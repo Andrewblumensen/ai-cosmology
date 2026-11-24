@@ -1,0 +1,20 @@
+# Downloaded data (fetched by scripts/download_data.py)
+data/*
+!data/README.md
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+
+# Outputs
+chains/
+runs/
+*.npz
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
