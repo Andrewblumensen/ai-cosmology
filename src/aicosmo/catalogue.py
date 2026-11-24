@@ -139,7 +139,9 @@ add("Wang tanh transition",
     "If preferred: a transition in w between two plateaus at redshift zT with width dz.")
 
 add("Pade thawing",
-    {"w0": Param(-0.85, 0.1, -1.0, 0.3), "eta0": Param(1.0, 1.0, -1.0, 10.0)},
+    # eta0 >= 0 keeps the denominator positive. The harvested range [-1, 10] allowed a pole in
+    # w(z); the first batch run found it (eta0 = -0.66, pole at z = 0.77). Fixed 2026-11-24.
+    {"w0": Param(-0.85, 0.1, -1.0, 0.3), "eta0": Param(1.0, 1.0, 0.0, 10.0)},
     lambda w0, eta0: (lambda z: -1 + (1 + w0) / (1 + (eta0 / 3) * ((1 + z) ** 3 - 1))),
     "paper-new", "Shlivko+ 2025 arXiv:2512.20832 eq. 1",
     "If preferred: a thawing scalar field (w >= -1, no crossing) explains DESI.")

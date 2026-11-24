@@ -121,6 +121,7 @@ class Score:
     errors: dict[str, float]
     w_min: float             # min w(z) over 0 <= z <= 3
     phantom_crossing: bool   # w - (-1) changes sign for 0 <= z <= 3
+    pathology: str = ""      # e.g. a pole in w(z) or a sign change of the DE density
     x: np.ndarray = field(default=None, repr=False)  # raw best-fit vector (base + model)
     extra: dict = field(default_factory=dict)
 
@@ -160,10 +161,23 @@ def score(model: Model, data: Data, errors: bool = True, starts: int = 1, seed: 
     best["Omega_m"] = c.omega_m
     if data.calibrated:
         best["H0"] = 100 * x[0]
-    wz = effective_w(model, x[nb:], Z_CHECK[Z_CHECK <= 3], c.omega_m) + 1.0
+    zc = Z_CHECK[Z_CHECK <= 3]
+    wz = effective_w(model, x[nb:], zc, c.omega_m) + 1.0
     return Score(model.name, chi2, len(x), data.n_points, best,
                  dict(zip(names, map(float, err))), float(np.nanmin(wz) - 1),
-                 bool(np.nanmin(wz) < -1e-6 and np.nanmax(wz) > 1e-6), x=np.asarray(x))
+                 bool(np.nanmin(wz) < -1e-6 and np.nanmax(wz) > 1e-6),
+                 pathology=pathology(wz, c.E(zc) ** 2 - c.omega_m * (1 + zc) ** 3),
+                 x=np.asarray(x))
+
+
+def pathology(w_plus_1: np.ndarray, de: np.ndarray) -> str:
+    """Flags for unphysical best fits on 0 <= z <= 3 (data range)."""
+    flags = []
+    if np.any(de <= 0):
+        flags.append("DE density <= 0")
+    elif not np.all(np.isfinite(w_plus_1)) or np.nanmax(np.abs(w_plus_1)) > 4:
+        flags.append("pole/jump in w")
+    return ", ".join(flags)
 
 
 def effective_w(model: Model, theta, z: np.ndarray, Om: float | None = None) -> np.ndarray:
