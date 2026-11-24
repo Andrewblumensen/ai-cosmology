@@ -4,17 +4,37 @@ Newest entries first. Every session ends by updating "Next up".
 
 ## Next up
 
-**Read `docs/strategy-2026-11-24.md` first.** A change of approach was proposed and is
-awaiting the user's go-ahead: move from hand-checked idea batches to machine-scored search.
+Strategy approved (docs/strategy-2026-11-24.md), with a changed order and the rule that each
+step must reproduce published results before it is used. Step 1 is done (session 10).
 
-1. **If approved — ID-033**: re-score a catalogue of published DE / H0 models on DESI DR2
-   BAO + Pantheon+. Steps: (a) choose the catalogue source and list the models with
-   closed-form H(z) or w(z); (b) write and commit the pre-registration (penalty, threshold
-   vs w0wa, look-elsewhere correction); (c) build a generic scorer in src/aicosmo/ on top
-   of bao.py and sn.py; (d) score and log.
-2. **ID-034** (after 033): evolutionary symbolic H(z) search plus a ΛCDM-mock false-alarm run.
-3. Older queue, lower priority: ID-031b (host ages), ID-021 (CMB-inclusive DR3
-   predictions), ID-026, ID-027, optional ID-032c.
+1. **ID-033 step 2 — generic model API.** A model = name, parameters with ranges, and w(z)
+   (later E(z)). Score = best-fit χ² on DESI DR2 BAO + compressed CMB + Pantheon+, plus
+   AIC/BIC and physicality flags. Build on `Combo` in scripts/reproduce_desi_dr2.py (move it
+   into src/aicosmo/). Validate: ΛCDM and w0wa through the API give the session-10 numbers.
+2. **Step 3 — ΛCDM mocks** from the BAO, SN and CMB covariances. Validate: the mean χ²_min of
+   ΛCDM on mocks ≈ number of data points minus parameters; the Δχ²(w0wa) distribution ≈ χ² with 2 dof.
+3. **Step 4 — literature check** for existing DR2 multi-model re-scorings, then pick 20–30
+   models, write the pre-registration (remember the scorer is conservative by ≈3 in χ²
+   against full CMB) and score them.
+4. Step 5 — ID-034 (no-phantom-crossing question).
+
+## 2026-11-24 (session 10) — Scorer with compressed CMB, validated against CAMB and DESI
+
+- User approved the strategy. Changed order: scorer with CMB first, then a small ID-033,
+  then ID-034. Rule: every step must reproduce published results.
+- New `Cosmology` (src/aicosmo/cosmology.py): flat background to z = 1300 with photons and
+  Neff = 3.044 incl. one 0.06 eV neutrino (CAMB conventions). z*, r*, r_d come from a CAMB
+  table over (ω_b, ω_bc) (scripts/build_early_table.py); checked independent of H0 and w0wa to 1e-7.
+- **Check 1, against CAMB 2.0.5:** E(z), distances, r_d and θ* agree to ≤ 2e-7 for ΛCDM and
+  w0wa models (θ* error ≈ 0.0002σ of the CMB prior). Our evaluation is ≈ 2–3 ms vs 14 ms in CAMB.
+- **Check 2, against DESI DR2 (arXiv:2503.14738):** compressed CMB prior (θ*, ω_b, ω_bc) from
+  their Appendix A. All published numbers reproduced within 0.11σ; Δχ²_MAP(w0wa − ΛCDM):
+  DESI −4.66 (pub. −4.7), DESI+Pantheon+ −4.90 (−4.9), DESI+CMBc −8.08 (−8.0). ΛCDM
+  DESI+BBN+θ*: Ωm 0.2965 (0.2967 ± 0.0045), H0 68.49 (68.45 ± 0.47).
+- **Learned:** for DESI+CMB+Pantheon+, parameters agree within 0.5σ, but Δχ² is −7.6 vs DESI's
+  −10.7 (they used full CMB with lensing; DESI shows the same gap, −8.0 vs −12.5). Our scorer
+  is conservative by ≈ 3 in χ² relative to the full CMB.
+- No hypothesis tested; counts unchanged.
 
 ## 2026-11-24 (session 9) — Strategy rethink from AI-math results (no computation)
 

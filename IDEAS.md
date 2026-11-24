@@ -30,7 +30,10 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 ## Open ideas (highest priority first)
 
 ### ID-033 — Re-score the catalogue of published models on DESI DR2 (+ Pantheon+)
-- Status: proposed (awaiting user go-ahead; see docs/strategy-2026-11-24.md)
+- Status: testing. Approved by the user 2026-11-24 with a changed order: (1) scorer with
+  compressed CMB, validated against CAMB and published DESI fits (**done**, session 10);
+  (2) generic model API; (3) ΛCDM mock generator; (4) literature check for existing DR2
+  multi-model re-scorings, then a small catalogue (20–30 models); (5) ID-034.
 - Origin: Claude, from the Erdős-problems lesson (2026-11-24)
 - Idea: many published dark-energy / H0-tension models were fitted only to pre-DESI
   data. Build a catalogue of models that have closed-form H(z) or w(z) (start from H0
@@ -41,11 +44,18 @@ use only to confirm a finalist. (Decided 2026-11-24.)
   statement about the model space.
 - Pre-registered test and success criterion: to be written before scoring (which
   catalogue, penalty, threshold vs w0wa; look-elsewhere correction over the catalogue size).
-- Data: DESI DR2 BAO, Pantheon+ (DES-SN5YR held out for finalists).
+- Data: DESI DR2 BAO, Pantheon+, compressed CMB (θ*, ω_b, ω_bc) (DES-SN5YR held out for finalists).
+- Scorer caveat for the pre-registration: the compressed CMB lacks lensing, so Δχ²(w0wa − ΛCDM)
+  for DESI+CMB+Pantheon+ is −7.6 with our scorer vs −10.7 with DESI's full CMB. The scorer is
+  conservative by about 3 in χ²; thresholds must be set relative to our own w0wa value.
+- Code: src/aicosmo/cosmology.py, cmb.py, fit.py; scripts/reproduce_desi_dr2.py;
+  tests/test_cosmology_vs_camb.py, tests/test_desi_dr2_reproduction.py
 - Date: 2026-11-24
 
 ### ID-034 — Evolutionary symbolic search over expansion histories, calibrated on mocks
-- Status: proposed (after ID-033; reuses its scorer)
+- Status: proposed (after ID-033; reuses its scorer). Sharpened target (user + Claude,
+  2026-11-24): can a physical model with no phantom crossing (w ≥ −1 at all z) fit as well as
+  w0wa? Free-form search alone would mostly rediscover w0wa, since the data fix only 2–3 numbers of w(z).
 - Origin: Claude, from the AlphaEvolve pattern; = the feasibility study's original plan
 - Idea: evolve compact symbolic H(z)/w(z) forms with an LLM mutation step. Score with
   the likelihoods plus physicality constraints and a complexity penalty. Run the
