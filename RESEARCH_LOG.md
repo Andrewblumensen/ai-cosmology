@@ -8,10 +8,10 @@ The user's direction (2026-11-24): research and unconventional cross-connections
 heavy evaluator work later; validate mainly against published research; only small,
 fast computations.
 
-1. **Birefringence is now the most "real-behaving" anomaly with the fewest
-   cross-connections.** Next batch: what else must a parity-violating photon coupling
-   do (anisotropic birefringence, frequency independence, effect on CMB B-modes,
-   galaxy polarisation)? Find a test no one has run. Pre-register first.
+1. **Birefringence follow-up (ID-028 is covered by prior work).** The decisive tests are
+   future (LiteBIRD reionization tomography; ~10^5 radio galaxies). Remaining angle:
+   which existing large radio/VLBI catalogues could reach 10^5 jet+polarisation pairs?
+   Feasibility check only.
 2. **ID-026.** Check whether the JWST UV-luminosity-function excess grows with peak
    height like an amplitude excess (needs published UVLF tables).
 3. **ID-027.** Full SN × BAO residual matrix (transverse vs radial).
@@ -37,7 +37,8 @@ fast computations.
 **Learned**
 - The anomaly list is shrinking to a core: H0, birefringence, evolving DE (~3.2–3.4σ),
   CMB lensing excess, cosmic dipole. S8, helium, parity-odd LSS, JWST, PTA are fading.
-- Birefringence is stable and under-connected: the best target for creative work next.
+- Birefringence is stable, and its key cross-test (is the field dark energy?) is already
+  mapped out by Namikawa, Naokawa, Battye and others; the decisive data are not in yet.
 - The "more structure early, not late" pattern keeps reappearing (lensing excess,
   JWST direction, low S8 at z < 1), but each piece is individually weak.
 

@@ -4,7 +4,7 @@ Every hypothesis, including failures. Never delete an entry: the counts are used
 correct significances for the look-elsewhere effect.
 
 **Hypotheses tested on data or published numbers: 10** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025)
-**Ideas screened against the literature only: 13** (table at the bottom)
+**Ideas screened against the literature only: 14** (table at the bottom)
 **Open ideas waiting for a test: 8** (ID-001, 002, 003, 010, 011, 021, 026, 027)
 
 Status values: `proposed` · `parked` · `testing` · `dead` · `known` (prior art covers it) · `interesting` · `promising`
@@ -248,6 +248,7 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 | ID-013 | Varying electron mass + the dark-energy field together fix H0 and DESI | known | [Smith+ 2025](https://arxiv.org/abs/2510.21931): DE preference survives (≳2σ) with varying m_e; dilaton version in [2512.13544](https://arxiv.org/pdf/2512.13544v2) |
 | ID-019 | The DM↔DE interaction that mimics DESI also fixes S8 | known, and problematic | It lowers S8 but suppresses fσ8 at z ≲ 0.8 against growth data ([Petri+ 2025](https://arxiv.org/abs/2508.17955)); S8 is fading anyway |
 | ID-023 | Dark energy differs by hemisphere | known | Anisotropic DE improves Pantheon+ fits but violates the CMB quadrupole ([Battye & Moss 2026](https://arxiv.org/abs/2601.22351)) |
+| ID-028 | Birefringence comes from the (DESI) dark-energy field: test with low-z sources | known; decisive tests are future | DE-type fields give a "universal" rotation profile mostly at z ≲ 10, while DM-type fields give ~0 at low z ([Naokawa 2025](https://arxiv.org/pdf/2504.06709)). Radio galaxies (~3000 now) need ~10⁵ sources to reach ~0.1° ([Battye+ 2026](https://arxiv.org/pdf/2607.02664)); LiteBIRD reionization tomography can rule out DE origin ([Nakatsuka+ 2022](https://arxiv.org/abs/2203.08560)) |
 | ID-015 | Dark matter–dark energy energy exchange makes phantom crossing only apparent | known | [Guedezounme+ 2026](https://arxiv.org/abs/2507.18274), many others |
 | — | JWST bright galaxies need new cosmology | parked | ΛCDM fits with rising star-formation efficiency ([Prada+ 2026](https://arxiv.org/html/2604.18683v1)) |
 | — | PTA amplitude needs new physics | parked | Largely resolved astrophysically ([Mingarelli+ 2026](https://arxiv.org/abs/2603.13643)) |
