@@ -4,11 +4,16 @@ Newest entries first. Every session ends by updating "Next up".
 
 ## Next up
 
-1. **ID-031 (Baade-type audit)**: population-mixing risks per ladder rung; SN
-   progenitor-age dispute first.
-2. **ID-026, ID-027, ID-021 (CMB-inclusive predictions)**.
-3. Optional ID-032c: ask the timescape authors' published BAO treatment (Heinesen+)
-   whether D_H = dD/dz is the right mapping; rerun if not.
+1. **ID-031b**: an age-based (not mass-based) version of the population test needs host
+   ages; check whether Union3.1 / DES host-age catalogues are public.
+2. **ID-021**: CMB-inclusive DESI DR3 predictions (add radiation + compressed CMB prior).
+3. **ID-026, ID-027** as before.
+
+## 2026-11-24 (session 8) — Baade-type audit (ID-031, 031a)
+
+- docs/baade-audit.md: population-mixing risks per rung.
+- ID-031a (pre-registered): no redshift evolution of the residual host-mass step in
+  Pantheon+ (slope 0.8σ; implied drift 0.006 ± 0.007 mag vs 0.04 needed). Agrees with DES.
 
 ## 2026-11-24 (session 7) — Timescape + DESI BAO (ID-032b)
 

@@ -3,7 +3,7 @@
 Every hypothesis, including failures. Never delete an entry: the counts are used to
 correct significances for the look-elsewhere effect.
 
-**Hypotheses tested on data or published numbers: 14** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032)
+**Hypotheses tested on data or published numbers: 15** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032)
 **Ideas screened against the literature only: 14** (table at the bottom)
 **Open ideas waiting for a test: 10** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032)
 
@@ -166,6 +166,10 @@ use only to confirm a finalist. (Decided 2026-11-24.)
   population effect" if |s1| > 2σ; "none" otherwise. Also report how the high-mass
   fraction changes with z and the implied magnitude drift
   Δm(z) = s1·z·(high-mass fraction), compared with the ~0.04 mag needed to matter for DE.
+- **ID-031a result: none.** Residual step s(z) = 0.007 + 0.030(±0.037)·z, slope 0.8σ;
+  implied drift 0.006 ± 0.007 mag vs ~0.04 needed. Consistent with DES. Limitation: mass
+  is only a proxy for age. Details: docs/baade-audit.md; code
+  `scripts/test_mass_step_evolution.py`.
 
 ### ID-027 — Full SN × BAO residual correlation matrix
 - Status: proposed (generalises ID-005; the engine for ID-002)
