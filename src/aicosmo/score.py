@@ -43,14 +43,17 @@ class Model:
     notes: str = ""
     density: bool = False    # True: `w` returns the dark-energy density ratio, not w(z)
     source: str = ""         # reference or origin (paper, LLM, human)
+    uses_om: bool = False    # True: `w` also takes Om (models defined through the full H(z))
 
-    def w_of(self, theta: np.ndarray) -> WFunc:
+    def w_of(self, theta: np.ndarray, Om: float | None = None) -> WFunc:
         kw = dict(zip(self.params, theta))
         for (n, p), v in zip(self.params.items(), theta):
             if not p.lo <= v <= p.hi:
                 raise ValueError(f"{n} outside its range")
         if self.constraint and not self.constraint(**kw):
             raise ValueError("constraint violated")
+        if self.uses_om:
+            kw["Om"] = Om
         return self.w(**kw)
 
 
@@ -87,6 +90,15 @@ class Data:
             return c, c.hrd
         h = 0.68  # only sets the tiny radiation term
         return Cosmology(h, 0.0222, base[0] * h * h - OMEGA_NU, **kw), base[1]
+
+    def omega_m(self, base) -> float:
+        return (base[2] + OMEGA_NU) / base[0] ** 2 if self.calibrated else base[0]
+
+    def build(self, model: Model, x) -> tuple[Cosmology, float]:
+        """Cosmology for parameter vector x = (base params, model params)."""
+        nb = len(self.base()[0])
+        fn = model.w_of(x[nb:], Om=self.omega_m(x[:nb]))
+        return self.cosmology(x[:nb], fn, model.density)
 
     def chi2(self, c: Cosmology, hrd: float) -> float:
         out = sum(p.chi2(c) for p in self.priors)
@@ -131,8 +143,7 @@ def score(model: Model, data: Data, errors: bool = True, starts: int = 1, seed: 
     steps = bsteps + [p.scale / 10 for p in model.params.values()]
 
     def f(x):
-        c, hrd = data.cosmology(x[:nb], model.w_of(x[nb:]), model.density)
-        return data.chi2(c, hrd)
+        return data.chi2(*data.build(model, x))
 
     x, chi2 = best_fit(f, x0, scale)
     rng = np.random.default_rng(seed)
@@ -143,21 +154,21 @@ def score(model: Model, data: Data, errors: bool = True, starts: int = 1, seed: 
         if ct < chi2:
             x, chi2 = xt, ct
     err = gaussian_errors(f, x, steps) if errors else np.full(len(x), np.nan)
-    c, _ = data.cosmology(x[:nb], model.w_of(x[nb:]), model.density)
+    c, _ = data.build(model, x)
     names = (["h", "omega_b", "omega_bc"] if data.calibrated else ["Omega_m", "hrd"]) + list(model.params)
     best = dict(zip(names, map(float, x)))
     best["Omega_m"] = c.omega_m
     if data.calibrated:
         best["H0"] = 100 * x[0]
-    wz = effective_w(model, x[nb:], Z_CHECK[Z_CHECK <= 3]) + 1.0
+    wz = effective_w(model, x[nb:], Z_CHECK[Z_CHECK <= 3], c.omega_m) + 1.0
     return Score(model.name, chi2, len(x), data.n_points, best,
                  dict(zip(names, map(float, err))), float(np.nanmin(wz) - 1),
                  bool(np.nanmin(wz) < -1e-6 and np.nanmax(wz) > 1e-6), x=np.asarray(x))
 
 
-def effective_w(model: Model, theta, z: np.ndarray) -> np.ndarray:
+def effective_w(model: Model, theta, z: np.ndarray, Om: float | None = None) -> np.ndarray:
     """w(z); for density models w = -1 + (1+z) f'(z) / (3 f(z)) (NaN where f changes sign)."""
-    fn = model.w_of(theta)
+    fn = model.w_of(theta, Om=Om)
     if not model.density:
         return np.asarray(fn(z), dtype=float) * np.ones_like(z)
     f = np.asarray(fn(z), dtype=float) * np.ones_like(z)
