@@ -29,6 +29,14 @@ Directions are relative to Planck-calibrated ΛCDM. "?" means no clear requireme
    are either separate physics or systematics, so they should be screened separately
    from the background-expansion anomalies.
 
+## Cross-epoch link (ID-024)
+
+If the CMB lensing excess is a real ~4% amplitude excess that extends to z ≈ 10, rare
+halos hosting JWST's bright galaxies become ×1.6–2.3 more common at z = 10 and
+×1.9–3.2 at z = 12. That is the same direction as the JWST excess, which adds a third
+entry to the "more structure early" column. It sharpens conflict 2: whatever boosts
+early structure must switch off or reverse by z < 1.
+
 ## Use
 
 Before proposing or fitting a mechanism, fill in its row. A mechanism must match the

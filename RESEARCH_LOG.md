@@ -8,16 +8,38 @@ The user's direction (2026-11-24): research and unconventional cross-connections
 heavy evaluator work later; validate mainly against published research; only small,
 fast computations.
 
-1. **ID-020 (regression-to-the-mean monitor).** Collect release-by-release numbers for
-   the cosmic dipole (CatWISE versions), birefringence (WMAP→Planck→ACT) and H0
-   (SH0ES releases). Pre-register the criterion, then compare with expected growth.
-2. **ID-019.** Work out the growth-sign implied by the DM↔DE interaction pattern that
-   fakes phantom crossing; compare with docs/sign-fingerprint.md.
-3. **ID-011.** Make the fingerprint quantitative (ΔH/H and Δσ8 per redshift bin from
-   published reconstructions).
-4. **ID-021.** Draft the prediction registry for DESI DR3 (needs CMB info to be useful).
-5. Next idea batch: push harder on non-FLRW and parity-violating anomalies (dipole,
-   birefringence), which the background-expansion work cannot touch.
+1. **Birefringence is now the most "real-behaving" anomaly with the fewest
+   cross-connections.** Next batch: what else must a parity-violating photon coupling
+   do (anisotropic birefringence, frequency independence, effect on CMB B-modes,
+   galaxy polarisation)? Find a test no one has run. Pre-register first.
+2. **ID-026.** Check whether the JWST UV-luminosity-function excess grows with peak
+   height like an amplitude excess (needs published UVLF tables).
+3. **ID-027.** Full SN × BAO residual matrix (transverse vs radial).
+4. **ID-021.** CMB-inclusive DR3 predictions (needs a compressed CMB prior and
+   radiation in background.py).
+5. **ID-011.** Quantitative fingerprint (ΔH/H, Δσ8 per bin).
+
+## 2026-11-24 (session 4) — Batch 3: fading-or-real, sky axes, cross-epoch, predictions
+
+**Done (pre-registrations committed before data for ID-020 and ID-022)**
+- ID-020 monitor: H0 and birefringence behave like real signals; S8 fading (pull -4.4);
+  dipole significance changes are method-driven.
+- ID-022: 10 reported anomaly axes are consistent with random (p = 0.46).
+- ID-021: first prediction registry entry, `docs/predictions/desi-final-bao.md`.
+- ID-024: lensing excess, if real and persistent to z ≈ 10, boosts JWST bright-galaxy
+  halos ×1.6–2.3 (z = 10). Leads to ID-026.
+- ID-025: neutron lifetime cannot explain low helium (dead).
+- ID-019, ID-023: already published (interaction model breaks fσ8; anisotropic DE breaks
+  the CMB quadrupole).
+- Anomaly map: added lensing excess, radio background excess, helium, parity-odd LSS,
+  and a fading-or-real table.
+
+**Learned**
+- The anomaly list is shrinking to a core: H0, birefringence, evolving DE (~3.2–3.4σ),
+  CMB lensing excess, cosmic dipole. S8, helium, parity-odd LSS, JWST, PTA are fading.
+- Birefringence is stable and under-connected: the best target for creative work next.
+- The "more structure early, not late" pattern keeps reappearing (lensing excess,
+  JWST direction, low S8 at z < 1), but each piece is individually weak.
 
 ## 2026-11-24 (session 3) — Idea batch 2: DES node, signal growth, quick kills
 

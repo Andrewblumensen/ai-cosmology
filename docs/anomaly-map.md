@@ -16,7 +16,23 @@ its source. Update rows in place as new results appear; keep the date column hon
 | **Cosmic birefringence** (CMB polarisation rotated) | WMAP+Planck β = 0.34° ± 0.09°; ACT DR6 consistent, but ACT has unexplained systematics | Persistent, systematics-limited | [MPA 2026](https://www.mpa-garching.mpg.de/1137699/hl202602), [ACT DR6](https://journals.aps.org/prd/abstract/10.1103/pbc3-t52s) |
 | **JWST bright galaxies at z > 10** | Abundance is real | Fading as a cosmology anomaly: ΛCDM fits with rising star-formation efficiency | [Prada+ 2026](https://arxiv.org/html/2604.18683v1) |
 | **Little red dots / overmassive early black holes** | Black holes overmassive vs hosts at z > 4; LRDs vanish below z ≈ 3 | Active; mostly astrophysics | [LRD evolution 2026](https://arxiv.org/html/2606.02773) |
+| **CMB lensing excess** (driver of "negative neutrino mass") | A_lens = 1.083 ± 0.032, 2.7σ | Persistent across likelihoods | [What's the matter with Σmν (2025)](https://arxiv.org/pdf/2503.14470) |
+| **Radio background excess** (ARCADE 2) | > 5σ excess at 3–10 GHz; origin unknown | Persistent, unconnected to other anomalies so far | [Dev+ 2026](https://eprints.soton.ac.uk/506710/2/2509.03441v2.pdf) |
+| **Primordial helium deficit** (EMPRESS) | ~3σ low (2022) → "mild 1–2σ" (2025) | Fading | [EMPRESS XV](https://arxiv.org/abs/2506.24050) |
+| **Parity-odd galaxy 4-point function** | BOSS 2.9σ hint (2022) → DESI DR1 consistent with zero | Faded | [Philcox 2022](https://arxiv.org/abs/2206.04227), [DESI DR1 parity-odd](https://journals.aps.org/prd/abstract/10.1103/2dmd-hyt1) |
 | **PTA nanohertz background amplitude** | A ≈ 2×10⁻¹⁵, at the high end of predictions | Largely resolved by new SMBH binary population models | [Mingarelli+ 2026](https://arxiv.org/abs/2603.13643) |
+
+## Fading or real? (ID-020, ID-022)
+
+| Anomaly | Verdict | Evidence |
+| --- | --- | --- |
+| Hubble tension | behaves like a real signal | Effect held at 5.6–5.8 km/s/Mpc as errors shrank (pulls -1.02, +0.22) |
+| Birefringence | behaves like a real signal | 0.35 → 0.30 → 0.34°, pulls within ±0.7, significance up to ~3.8σ |
+| Evolving dark energy | consistent with real, low-power test | DR1 → DR2 matched the Asimov expectation (ID-016) |
+| S8 | fading | KiDS pull -4.4; DES/KiDS/HSC now mutually consistent |
+| Cosmic dipole | method-dependent | 4.9σ → 3.3–3.6σ from re-analyses of the same data |
+| Shared anomaly axis | not supported | 10 reported axes are consistent with random (p = 0.46) |
+| Helium deficit, parity-odd LSS, JWST galaxies, PTA amplitude | fading or faded | see table above |
 
 ## How the anomalies are connected
 

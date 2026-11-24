@@ -3,9 +3,9 @@
 Every hypothesis, including failures. Never delete an entry: the counts are used to
 correct significances for the look-elsewhere effect.
 
-**Hypotheses tested on data or published numbers: 6** (ID-004, 005, 012, 016, 017, 018)
-**Ideas screened against the literature only: 11** (table at the bottom)
-**Open ideas waiting for a test: 8**
+**Hypotheses tested on data or published numbers: 10** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025)
+**Ideas screened against the literature only: 13** (table at the bottom)
+**Open ideas waiting for a test: 8** (ID-001, 002, 003, 010, 011, 021, 026, 027)
 
 Status values: `proposed` · `parked` · `testing` · `dead` · `known` (prior art covers it) · `interesting` · `promising`
 
@@ -29,61 +29,15 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 
 ## Open ideas (highest priority first)
 
-### ID-020 — Regression-to-the-mean monitor for every anomaly
-- Status: proposed (high value, cheap)
-- Origin: Claude (2026-11-24), generalising ID-016
-- Idea: for each anomaly with several data releases (DESI DR1→DR2, CatWISE dipole
-  versions, SH0ES releases, birefringence WMAP→Planck→ACT), compare how the signal
-  changed with the change expected if the earlier best fit were true. Real effects
-  keep pace with precision; flukes and release-specific systematics fade.
-- If true, it would mean: an objective ranking of which anomalies behave like real
-  signals. That decides where all later effort goes.
-- **Pre-registered criterion (written 2026-11-24, before collecting numbers):** for each
-  pair of successive releases where the newer data include the older, let Δ be the
-  anomaly's effect size (deviation from the standard expectation) with error e.
-  pull = (Δ_new − Δ_old) / sqrt(e_old² − e_new²). "Fading" if pull < −1, "stable" if
-  |pull| ≤ 1, "growing" if pull > 1. Where releases are independent rather than nested,
-  use sqrt(e_old² + e_new²). Where only significances are published, use Δ/e = σ and
-  report the result as indicative only.
-- Date: 2026-11-24
-
-### ID-022 — Do the reported anomaly axes cluster on the sky? (2026 update)
-- Status: testing
-- Origin: Claude (2026-11-24); updates [Antoniou & Perivolaropoulos 2010](https://arxiv.org/abs/1007.4347)
-- Idea: many anomalies report a preferred direction. If they share one axis, a single
-  cause (a super-horizon gradient, a tilted frame) is implied.
-- If true, it would mean: evidence against statistical isotropy, the deepest
-  assumption of ΛCDM.
-- **Pre-registered (before computing):** fixed list of 10 axes, Galactic (l, b):
-  CMB dipole (264.0, 48.3); CatWISE quasar dipole (238.2, 28.8); CMB hemispherical
-  asymmetry (230, -16); CMB quadrupole (240, 63); CMB octopole (308, 63); quasar
-  polarisation alignment (267, 69); fine-structure-constant dipole (330, -15);
-  cluster H0 anisotropy (280, -15); Pantheon+ z<0.1 dipole (334.5, 16.0);
-  Kashlinsky bulk flow (283, 11). Treated as sign-less axes. Statistic: mean pairwise
-  |cos θ|; p-value from 10⁶ isotropic random sets. "Interesting" if p < 0.003 with all
-  10 AND p < 0.003 with the CMB-dipole-derived items (CMB dipole, CatWISE) removed.
-  Leave-one-out spread reported.
-- Date: 2026-11-24
-
 ### ID-021 — Public prediction registry for DESI DR3 and Euclid
-- Status: proposed
+- Status: first entry committed: `docs/predictions/desi-final-bao.md` (no-CMB version;
+  most discriminating bin: Lyman-α D_H at z = 2.33, 0.96σ). Next: a CMB-inclusive version.
 - Origin: Claude (2026-11-24)
 - Idea: before the next data releases, commit to this repo the predictions each live
   hypothesis makes (e.g. DR3 BAO values and errors if DR2's CPL fit is true, vs ΛCDM).
   The git timestamp proves they came first.
 - If true, it would mean: confirmed predictions carry far more weight than fits to
   existing data, especially from outside the field.
-- Date: 2026-11-24
-
-### ID-019 — Does the dark-sector interaction that fakes phantom crossing also fix or worsen S8?
-- Status: proposed
-- Origin: Claude, from the sign fingerprint (2026-11-24)
-- Idea: fits that explain DESI with a dark matter–dark energy interaction find energy
-  flowing DM→DE early and reversing later ([Guedezounme+ 2026](https://arxiv.org/abs/2507.18274)).
-  That pattern implies a definite change in late-time growth. Check its sign against
-  the clustering entries in docs/sign-fingerprint.md.
-- If true, it would mean: a fast consistency check that could kill or support a whole
-  model class.
 - Date: 2026-11-24
 
 ### ID-010 — Anomaly dependency graph
@@ -130,7 +84,72 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 - Idea: generate many relations between observables that must hold in ΛCDM and test them all.
 - Date: 2026-11-24
 
+### ID-026 — Does the JWST bright-galaxy excess scale like a clustering-amplitude excess?
+- Status: proposed (follows from ID-024)
+- Origin: Claude (2026-11-24)
+- Idea: an amplitude excess boosts halo abundance by a factor that grows with peak
+  height ν in a specific way (d ln n / d ln σ ≈ aν² − 1 for Sheth–Tormen). Rising
+  star-formation efficiency does not have to follow that pattern. Fit the JWST UV
+  luminosity function excess versus mass and redshift to see which pattern it follows.
+- If true, it would mean: JWST becomes the most sensitive probe of a few-percent
+  amplitude anomaly, linking it to the CMB lensing excess (two epochs, one cause).
+- Date: 2026-11-24
+
+### ID-027 — Full SN × BAO residual correlation matrix
+- Status: proposed (generalises ID-005; the engine for ID-002)
+- Idea: for every redshift shell, compare SN and BAO residuals from a common fit,
+  separately for transverse (D_M) and radial (D_H) BAO. A real geometric feature must
+  appear in both; a tracer-specific systematic appears in one.
+- Date: 2026-11-24
+
 ## Tested
+
+### ID-020 — Fading-or-real monitor
+- Status: **tested** (criterion pre-registered and committed before collecting numbers)
+- Result (pull per successive nested release; survey errors only):
+  - H0 (SH0ES − Planck): R19 → R22 pull -1.02 (borderline fading), R22 → 2025 +0.22
+    (stable). The effect has held near 5.6–5.8 km/s/Mpc while errors shrank.
+  - Birefringence: PR3 → PR4 -0.58, PR4 → WMAP+PR4 +0.63. **Stable**; 0.34° held while
+    the significance rose to ~3.8σ.
+  - S8 (KiDS): KiDS-1000 → Legacy pull **-4.37, fading** (3.2σ → 0.9σ; includes
+    methodology changes, which is the point).
+  - DESI evolving DE: signal-like but low power (ID-016).
+  - Cosmic dipole: not computable; the significance changes (4.9σ → 3.3–3.6σ) come
+    from different methods on the same data, not from new data.
+- Ranking for effort: H0 and birefringence behave most like real signals; evolving DE
+  is consistent with real but untested at high power; S8 is fading.
+- Code: `scripts/test_regression_monitor.py`
+- Date: 2026-11-24
+
+### ID-022 — Do the reported anomaly axes cluster on the sky?
+- Status: **dead** (pre-registered)
+- Result: all 10 axes: mean |cos| = 0.498 (isotropic expectation 0.500), p = 0.46.
+  Without CMB-dipole-derived axes: p = 0.84. Leave-one-out p range 0.18–0.76. The
+  2010 analysis that found ~0.8% chance alignment does not survive the updated axis
+  list. A sub-group (CMB dipole, quadrupole, octopole, quasar polarisation, CatWISE)
+  sits within ~30° of each other, the known "axis of evil" family, but that is a
+  post-hoc observation and is not counted as evidence.
+- Code: `scripts/test_anomaly_axes.py`
+- Date: 2026-11-24
+
+### ID-024 — How much would the CMB lensing excess boost JWST's early halos?
+- Status: **tested (sizing)**; leads to ID-026
+- Assumption: the lensing excess (A_lens = 1.083 ± 0.032) is a real ~4% amplitude
+  excess, and it persists to z ≈ 10. The second part is a strong, model-dependent assumption.
+- Result: halos hosting bright galaxies (10^10.5–10^11.5 M☉) become ×1.6–2.3 more
+  common at z = 10 and ×1.9–3.2 at z = 12 (×1.3–2.1 for A_lens − 1σ). Same direction
+  as the JWST excess, but not the whole of it, and a real high-z boost has to coexist
+  with S8 not being high at z < 1 (the "boosted early, suppressed late" fingerprint).
+- Code: `scripts/test_lensing_excess_jwst.py` (Eisenstein–Hu + Sheth–Tormen)
+- Date: 2026-11-24
+
+### ID-025 — Neutron-lifetime discrepancy explains the low primordial helium?
+- Status: **dead**
+- Result: δY_p/Y_p = 0.72 δτ_n/τ_n. The beam–bottle gap (~10 s of ~880 s) shifts Y_p by
+  ~0.002, and the beam value moves it the wrong way. The EMPRESS deficit is ~0.008
+  (approximate). Prior work already notes EMPRESS would need a much shorter lifetime
+  ([2210.12031](https://arxiv.org/pdf/2210.12031)).
+- Date: 2026-11-24
 
 ### ID-012 — DES as a common node behind two anomalies
 - Status: **dead**
@@ -227,8 +246,61 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 | ID-009 | SN progenitor-age bias fakes evolving DE | known, disputed | [Son+ 2025](https://arxiv.org/pdf/2510.13121) vs [Wiseman+ 2026](https://arxiv.org/abs/2601.13785) |
 | ID-014 | DE density "peaks" at z ≈ 0.4, near matter–DE equality: a physical feedback? | parked | Crossing sits at the CPL pivot redshift, likely a parameterisation effect ([2607.01226](https://arxiv.org/pdf/2607.01226)) |
 | ID-013 | Varying electron mass + the dark-energy field together fix H0 and DESI | known | [Smith+ 2025](https://arxiv.org/abs/2510.21931): DE preference survives (≳2σ) with varying m_e; dilaton version in [2512.13544](https://arxiv.org/pdf/2512.13544v2) |
+| ID-019 | The DM↔DE interaction that mimics DESI also fixes S8 | known, and problematic | It lowers S8 but suppresses fσ8 at z ≲ 0.8 against growth data ([Petri+ 2025](https://arxiv.org/abs/2508.17955)); S8 is fading anyway |
+| ID-023 | Dark energy differs by hemisphere | known | Anisotropic DE improves Pantheon+ fits but violates the CMB quadrupole ([Battye & Moss 2026](https://arxiv.org/abs/2601.22351)) |
 | ID-015 | Dark matter–dark energy energy exchange makes phantom crossing only apparent | known | [Guedezounme+ 2026](https://arxiv.org/abs/2507.18274), many others |
 | — | JWST bright galaxies need new cosmology | parked | ΛCDM fits with rising star-formation efficiency ([Prada+ 2026](https://arxiv.org/html/2604.18683v1)) |
 | — | PTA amplitude needs new physics | parked | Largely resolved astrophysically ([Mingarelli+ 2026](https://arxiv.org/abs/2603.13643)) |
 | — | Negative neutrino mass is excess lensing | known | [Craig+ 2024](https://arxiv.org/abs/2407.07878), [Green & Meyers 2025](https://arxiv.org/abs/2508.20999) |
 | — | Local bulk flow / dipole explains acceleration | known, contested | [Rameez 2024](https://arxiv.org/abs/2411.14758) vs [Rubin & Heitlauf 2020](https://par.nsf.gov/servlets/purl/10273965) |
+
+## Archived open-idea entries (moved after testing; pre-registrations kept verbatim)
+
+Pre-registration commits: ID-020 in 5e744c9, ID-022 in 26b2940.
+
+### ID-020 — Regression-to-the-mean monitor for every anomaly
+- Status: proposed (high value, cheap)
+- Origin: Claude (2026-11-24), generalising ID-016
+- Idea: for each anomaly with several data releases (DESI DR1→DR2, CatWISE dipole
+  versions, SH0ES releases, birefringence WMAP→Planck→ACT), compare how the signal
+  changed with the change expected if the earlier best fit were true. Real effects
+  keep pace with precision; flukes and release-specific systematics fade.
+- If true, it would mean: an objective ranking of which anomalies behave like real
+  signals. That decides where all later effort goes.
+- **Pre-registered criterion (written 2026-11-24, before collecting numbers):** for each
+  pair of successive releases where the newer data include the older, let Δ be the
+  anomaly's effect size (deviation from the standard expectation) with error e.
+  pull = (Δ_new − Δ_old) / sqrt(e_old² − e_new²). "Fading" if pull < −1, "stable" if
+  |pull| ≤ 1, "growing" if pull > 1. Where releases are independent rather than nested,
+  use sqrt(e_old² + e_new²). Where only significances are published, use Δ/e = σ and
+  report the result as indicative only.
+- Date: 2026-11-24
+
+### ID-022 — Do the reported anomaly axes cluster on the sky? (2026 update)
+- Status: testing
+- Origin: Claude (2026-11-24); updates [Antoniou & Perivolaropoulos 2010](https://arxiv.org/abs/1007.4347)
+- Idea: many anomalies report a preferred direction. If they share one axis, a single
+  cause (a super-horizon gradient, a tilted frame) is implied.
+- If true, it would mean: evidence against statistical isotropy, the deepest
+  assumption of ΛCDM.
+- **Pre-registered (before computing):** fixed list of 10 axes, Galactic (l, b):
+  CMB dipole (264.0, 48.3); CatWISE quasar dipole (238.2, 28.8); CMB hemispherical
+  asymmetry (230, -16); CMB quadrupole (240, 63); CMB octopole (308, 63); quasar
+  polarisation alignment (267, 69); fine-structure-constant dipole (330, -15);
+  cluster H0 anisotropy (280, -15); Pantheon+ z<0.1 dipole (334.5, 16.0);
+  Kashlinsky bulk flow (283, 11). Treated as sign-less axes. Statistic: mean pairwise
+  |cos θ|; p-value from 10⁶ isotropic random sets. "Interesting" if p < 0.003 with all
+  10 AND p < 0.003 with the CMB-dipole-derived items (CMB dipole, CatWISE) removed.
+  Leave-one-out spread reported.
+- Date: 2026-11-24
+
+### ID-019 — Does the dark-sector interaction that fakes phantom crossing also fix or worsen S8?
+- Status: proposed
+- Origin: Claude, from the sign fingerprint (2026-11-24)
+- Idea: fits that explain DESI with a dark matter–dark energy interaction find energy
+  flowing DM→DE early and reversing later ([Guedezounme+ 2026](https://arxiv.org/abs/2507.18274)).
+  That pattern implies a definite change in late-time growth. Check its sign against
+  the clustering entries in docs/sign-fingerprint.md.
+- If true, it would mean: a fast consistency check that could kill or support a whole
+  model class.
+- Date: 2026-11-24
