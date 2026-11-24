@@ -47,6 +47,24 @@ use only to confirm a finalist. (Decided 2026-11-24.)
   report the result as indicative only.
 - Date: 2026-11-24
 
+### ID-022 — Do the reported anomaly axes cluster on the sky? (2026 update)
+- Status: testing
+- Origin: Claude (2026-11-24); updates [Antoniou & Perivolaropoulos 2010](https://arxiv.org/abs/1007.4347)
+- Idea: many anomalies report a preferred direction. If they share one axis, a single
+  cause (a super-horizon gradient, a tilted frame) is implied.
+- If true, it would mean: evidence against statistical isotropy, the deepest
+  assumption of ΛCDM.
+- **Pre-registered (before computing):** fixed list of 10 axes, Galactic (l, b):
+  CMB dipole (264.0, 48.3); CatWISE quasar dipole (238.2, 28.8); CMB hemispherical
+  asymmetry (230, -16); CMB quadrupole (240, 63); CMB octopole (308, 63); quasar
+  polarisation alignment (267, 69); fine-structure-constant dipole (330, -15);
+  cluster H0 anisotropy (280, -15); Pantheon+ z<0.1 dipole (334.5, 16.0);
+  Kashlinsky bulk flow (283, 11). Treated as sign-less axes. Statistic: mean pairwise
+  |cos θ|; p-value from 10⁶ isotropic random sets. "Interesting" if p < 0.003 with all
+  10 AND p < 0.003 with the CMB-dipole-derived items (CMB dipole, CatWISE) removed.
+  Leave-one-out spread reported.
+- Date: 2026-11-24
+
 ### ID-021 — Public prediction registry for DESI DR3 and Euclid
 - Status: proposed
 - Origin: Claude (2026-11-24)
