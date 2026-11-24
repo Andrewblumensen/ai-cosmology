@@ -105,7 +105,15 @@ use only to confirm a finalist. (Decided 2026-11-24.)
   modelling dominates. Implement timescape distances from the original papers, refit
   Pantheon+ with the standard likelihood and with z-cuts, then add DESI BAO.
 - If true, it would mean: dark energy is (partly) an averaging artefact. Very high impact.
-- Pre-registration: write the criterion before the first fit.
+- **Pre-registered (2026-11-24, before any fit):** fit flat ΛCDM (free Ωm) and timescape
+  (free void fraction f_v0) to Pantheon+ with the standard STAT+SYS covariance and M
+  marginalised, in the CMB frame as published (zHD), for z_min = 0.01, 0.033, 0.075.
+  Report Δχ² = χ²(ΛCDM) − χ²(timescape); both models have one free shape parameter, so
+  Δχ² is a likelihood ratio. "Supports the claim" if Δχ² ≥ 4 at z_min = 0.075;
+  "partially reproduces" if Δχ² ≥ 4 only at low z_min; "does not reproduce" otherwise.
+  Also report the best-fit f_v0 against Wiltshire's published range.
+  Caveat stated in advance: Seifert+ use a different (Bayesian, light-curve-level)
+  likelihood, so disagreement does not by itself refute them.
 - Date: 2026-11-24
 
 ### ID-031 — Baade-type population-mixing audit of today's standard candles
