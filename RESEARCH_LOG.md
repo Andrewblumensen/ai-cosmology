@@ -4,19 +4,34 @@ Newest entries first. Every session ends by updating "Next up".
 
 ## Next up
 
-The engine is built and validated (scorer, model API, mocks). ID-033's catalogue part is
-already in the literature, so the next target is ID-034's crossing question.
+1. **Read the look-elsewhere result** of ID-035 batch 1: `runs/catalogue_lee_100.log`
+   (100 w0wa mocks × 33 models, ≈ 3 h). Apply the pre-registered criterion: p < 0.01 for
+   T_real = 2.07 → candidate; otherwise batch 1 found nothing beyond w0wa. Log it in IDEAS.md.
+2. If nothing survives: batch 2 of the idea factory. Better ideas need a physical story *and*
+   a crossing shape (all top models cross −1). Harvest the models the agents could not give
+   in closed form (coupled DM–DE, f(T), entropic Chaplygin) via a small ODE solver.
+3. ID-034: the crossing question is now half-answered (thawing models ≈ 3–4 AIC worse than
+   w0wa). Pre-register a mock test with the best thawing model as truth.
+4. Speed: one catalogue pass is ≈ 30 CPU-minutes; a coarser high-z grid could cut this.
 
-1. **Pre-register ID-034a** in IDEAS.md before computing: non-crossing model = CPL restricted
-   to w ≥ −1 at all z (w0 ≥ −1, w0 + wa ≥ −1) as a first, simple stand-in; later a thawing
-   form from 2504.16337. Data: DESI DR2 + CMBc + Pantheon+. Statistic: Δχ² = χ²(non-crossing)
-   − χ²(CPL) on real data. Criterion: p-value from ≥ 300 mocks generated from the best-fit
-   non-crossing model. Write down the p threshold first (suggest: p < 0.01 = "crossing
-   supported", p > 0.1 = "crossing not required").
-2. Add the model (src/aicosmo/score.py), run with `--sn` mocks (expect ~10–20 min on 16
-   cores; scripts/mock_null_test.py prints progress now), log the result.
-3. Optional: read full texts of 2504.16337 and 2508.10514 for their non-crossing Δχ², and
-   check whether any paper already does mock calibration (novelty check).
+## 2026-11-24 (session 12) — Idea factory, batch 1 (ID-035)
+
+- User asked for broad research cross-checked by the automatic scorer. Built the idea
+  factory: two research agents harvested 19 DESI-era and 21 older models; after removing
+  duplicates and models needing perturbations/ODEs, 27 entered the catalogue, plus 5 new ones
+  from Claude (src/aicosmo/catalogue.py, with sources and impact notes).
+- Engine extensions: dark energy as a density f(z) as well as w(z); models defined through
+  the full H(z) get Ωm; multi-start fitting; pathology flags. All 26 models with a ΛCDM limit
+  reproduce ΛCDM there (tests/test_catalogue.py).
+- Pre-registered ID-035 before the batch. Honest note: the 5 Claude models were scored once
+  as a smoke test before the pre-registration was written (recorded in IDEAS.md).
+- **Result:** best is "tanh step in w", ΔAIC −2.07 vs w0wa, just past "interesting".
+  All top models cross w = −1; thawing models are ≈ 3–4 AIC worse than w0wa.
+  Ricci DE, Λ ∝ H, flat DGP and PEDE are ruled out by large margins.
+- **Caught an artefact:** Padé thawing came out on top through a pole in w(z), from the
+  harvested parameter range. Fixed and flagged automatically from now on.
+- Look-elsewhere calibration started (100 mocks); result next session.
+- Hypothesis count 15 → 47.
 
 ## 2026-11-24 (session 11) — Model API, mocks, literature check
 

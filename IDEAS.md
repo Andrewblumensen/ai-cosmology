@@ -3,7 +3,7 @@
 Every hypothesis, including failures. Never delete an entry: the counts are used to
 correct significances for the look-elsewhere effect.
 
-**Hypotheses tested on data or published numbers: 15** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032)
+**Hypotheses tested on data or published numbers: 47** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032; ID-035 batch 1: 32 models)
 **Ideas screened against the literature only: 15** (table at the bottom)
 **Open ideas waiting for a test: 11** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032, 034)
 
@@ -48,6 +48,17 @@ use only to confirm a finalist. (Decided 2026-11-24.)
     DES-SN5YR replaces Pantheon+ (only for a finalist, once).
   - Secondary (feeds ID-034): the best model with no crossing (w ≥ −1 for z ≤ 3) vs w0wa.
 - Hypothesis count: every catalogue model counts as one test once scored.
+- **Result, batch 1 (2026-11-24, session 12)**, docs/catalogue-leaderboard.md, 32 models:
+  - Best: "tanh step in w" (llm-new) ΔAIC −2.07 vs w0wa (Δχ² −11.7 vs ΛCDM, k = 6), a fast
+    transition from w ≈ −1.33 to −0.92 at z ≈ 0.73. Meets "interesting" by a hair. Next:
+    Alam–Sahni–Starobinsky Taylor (2004) −1.88, linear-in-z w −1.30. 11 models beat w0wa in AIC.
+  - Every top model crosses w = −1. Best w ≥ −1 (thawing) models: Dutta–Scherrer +2.96,
+    Saturating DE +4.13, Padé thawing +4.31 vs w0wa. Feeds ID-034: crossing is preferred by ≈ 3–4 AIC.
+  - Ruled out hard (ΔAIC vs ΛCDM): Ricci DE +1008, Λ ∝ H +396, flat DGP +264, PEDE +51.
+  - Artefact caught: Padé thawing first came out on top (ΔAIC −5.6) via a pole in w(z) at
+    z = 0.77 from the harvested range η0 ≥ −1. Range fixed to η0 ≥ 0 (denominator > 0) after
+    seeing the result; a pathology flag (poles, DE density ≤ 0) now marks such fits.
+  - Look-elsewhere (criterion 1): running, 100 w0wa mocks (scripts/catalogue_lee.py).
 - Code: scripts/run_catalogue.py → docs/catalogue-leaderboard.md
 - Date: 2026-11-24
 
