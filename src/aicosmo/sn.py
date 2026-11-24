@@ -56,6 +56,7 @@ class PantheonPlus:
         self.m = self.tab["m_b_corr"].astype(float)
         self.l, self.b = radec_to_galactic(self.tab["RA"].astype(float), self.tab["DEC"].astype(float))
         c = cov[np.ix_(keep, keep)]
+        self.cov = c
         self.inv_cov = np.linalg.inv(c)
         self._ones_inv = self.inv_cov.sum(axis=1)
         self._norm = self._ones_inv.sum()

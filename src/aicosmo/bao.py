@@ -25,6 +25,7 @@ class DesiDR2BAO:
         self.value = np.array([float(r[1]) for r in rows])
         self.kind = [r[2] for r in rows]
         cov = np.loadtxt(data_dir / COV_FILE)
+        self.cov = cov
         self.inv_cov = np.linalg.inv(cov)
         known = {"DV_over_rs", "DM_over_rs", "DH_over_rs"}
         if set(self.kind) - known:

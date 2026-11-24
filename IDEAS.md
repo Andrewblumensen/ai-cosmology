@@ -5,7 +5,7 @@ correct significances for the look-elsewhere effect.
 
 **Hypotheses tested on data or published numbers: 15** (ID-004, 005, 012, 016, 017, 018, 020, 022, 024, 025, 029, 030, 032)
 **Ideas screened against the literature only: 14** (table at the bottom)
-**Open ideas waiting for a test: 12** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032, 033, 034)
+**Open ideas waiting for a test: 11** (ID-001, 002, 003, 010, 011, 021, 026, 027, 031, 032, 034)
 
 Status values: `proposed` · `parked` · `testing` · `dead` · `known` (prior art covers it) · `interesting` · `promising`
 
@@ -30,10 +30,13 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 ## Open ideas (highest priority first)
 
 ### ID-033 — Re-score the catalogue of published models on DESI DR2 (+ Pantheon+)
-- Status: testing. Approved by the user 2026-11-24 with a changed order: (1) scorer with
-  compressed CMB, validated against CAMB and published DESI fits (**done**, session 10);
-  (2) generic model API; (3) ΛCDM mock generator; (4) literature check for existing DR2
-  multi-model re-scorings, then a small catalogue (20–30 models); (5) ID-034.
+- Status: **known** for the catalogue part (session 11). Literature check
+  (docs/literature-dr2-rescoring.md): DESI 2503.14743, Chaudhary 2508.10514 (8 forms, same
+  compressed CMB), Malekjani 2511.18657, Mangang 2609.02910 already re-score many
+  parametrisations on DR2; all find w0wa sufficient and crossing near z ≈ 0.5. Not run, so
+  not counted as a test. The engine built for it is kept: scorer (session 10), generic model
+  API `src/aicosmo/score.py` and mocks `src/aicosmo/mocks.py` (session 11), all validated.
+  Remaining gap, moved to ID-034: mock-calibrated significance.
 - Origin: Claude, from the Erdős-problems lesson (2026-11-24)
 - Idea: many published dark-energy / H0-tension models were fitted only to pre-DESI
   data. Build a catalogue of models that have closed-form H(z) or w(z) (start from H0
@@ -56,6 +59,11 @@ use only to confirm a finalist. (Decided 2026-11-24.)
 - Status: proposed (after ID-033; reuses its scorer). Sharpened target (user + Claude,
   2026-11-24): can a physical model with no phantom crossing (w ≥ −1 at all z) fit as well as
   w0wa? Free-form search alone would mostly rediscover w0wa, since the data fix only 2–3 numbers of w(z).
+  Literature (session 11): DESI says non-crossing models are "disfavored, but cannot yet be
+  ruled out"; de Souza 2504.16337 says thawing is comparable to CPL. Nobody (in abstracts)
+  calibrates this with mocks. Plan: fit the best non-crossing model, make mocks with it as the
+  truth, and ask how often CPL then shows a crossing preference as large as in the real data.
+  That gives a frequentist answer to "is the crossing real or a parametrisation artefact?".
 - Origin: Claude, from the AlphaEvolve pattern; = the feasibility study's original plan
 - Idea: evolve compact symbolic H(z)/w(z) forms with an LLM mutation step. Score with
   the likelihoods plus physicality constraints and a complexity penalty. Run the

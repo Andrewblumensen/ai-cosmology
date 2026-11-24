@@ -4,19 +4,36 @@ Newest entries first. Every session ends by updating "Next up".
 
 ## Next up
 
-Strategy approved (docs/strategy-2026-11-24.md), with a changed order and the rule that each
-step must reproduce published results before it is used. Step 1 is done (session 10).
+The engine is built and validated (scorer, model API, mocks). ID-033's catalogue part is
+already in the literature, so the next target is ID-034's crossing question.
 
-1. **ID-033 step 2 — generic model API.** A model = name, parameters with ranges, and w(z)
-   (later E(z)). Score = best-fit χ² on DESI DR2 BAO + compressed CMB + Pantheon+, plus
-   AIC/BIC and physicality flags. Build on `Combo` in scripts/reproduce_desi_dr2.py (move it
-   into src/aicosmo/). Validate: ΛCDM and w0wa through the API give the session-10 numbers.
-2. **Step 3 — ΛCDM mocks** from the BAO, SN and CMB covariances. Validate: the mean χ²_min of
-   ΛCDM on mocks ≈ number of data points minus parameters; the Δχ²(w0wa) distribution ≈ χ² with 2 dof.
-3. **Step 4 — literature check** for existing DR2 multi-model re-scorings, then pick 20–30
-   models, write the pre-registration (remember the scorer is conservative by ≈3 in χ²
-   against full CMB) and score them.
-4. Step 5 — ID-034 (no-phantom-crossing question).
+1. **Pre-register ID-034a** in IDEAS.md before computing: non-crossing model = CPL restricted
+   to w ≥ −1 at all z (w0 ≥ −1, w0 + wa ≥ −1) as a first, simple stand-in; later a thawing
+   form from 2504.16337. Data: DESI DR2 + CMBc + Pantheon+. Statistic: Δχ² = χ²(non-crossing)
+   − χ²(CPL) on real data. Criterion: p-value from ≥ 300 mocks generated from the best-fit
+   non-crossing model. Write down the p threshold first (suggest: p < 0.01 = "crossing
+   supported", p > 0.1 = "crossing not required").
+2. Add the model (src/aicosmo/score.py), run with `--sn` mocks (expect ~10–20 min on 16
+   cores; scripts/mock_null_test.py prints progress now), log the result.
+3. Optional: read full texts of 2504.16337 and 2508.10514 for their non-crossing Δχ², and
+   check whether any paper already does mock calibration (novelty check).
+
+## 2026-11-24 (session 11) — Model API, mocks, literature check
+
+- **Model API** (src/aicosmo/score.py): `Model` (named params with ranges, w(z), optional
+  constraint), `Data` (any mix of BAO / CMBc / SN / BBN / θ*), `score()` → χ², AIC, BIC,
+  min w, crossing flag. scripts/reproduce_desi_dr2.py now runs through it and gives the
+  identical session-10 numbers (all within 0.11σ of DESI).
+- **Mocks** (src/aicosmo/mocks.py): fiducial prediction + Gaussian noise from each dataset's
+  covariance. Validated on 300 ΛCDM mocks (DESI + CMBc): χ²_min(ΛCDM) mean 13.01 ± 0.29
+  (expect 13, KS p = 0.81); Δχ²(w0wa) mean 2.06 ± 0.12 (expect ≤ 2, KS p = 0.77).
+  Real Δχ² = 8.08 is exceeded by 1.3% of mocks (χ²₂ tail 1.8%), matching DESI's 2.4σ.
+  Runtime 5 min on 16 cores.
+- **Literature check** (docs/literature-dr2-rescoring.md, abstracts verified on arXiv):
+  ID-033's catalogue re-scoring is already published several times, including with the same
+  compressed CMB (Chaudhary 2508.10514). Phantom crossing is still open, and mock-calibrated
+  significance looks like the gap. ID-033 → known; ID-034 refocused.
+- No hypothesis tested; counts unchanged.
 
 ## 2026-11-24 (session 10) — Scorer with compressed CMB, validated against CAMB and DESI
 

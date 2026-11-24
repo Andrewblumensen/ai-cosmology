@@ -27,8 +27,7 @@ def test_reproduces_desi_dr2(name):
 
     ours = run(name)
     for key, ref in PUBLISHED[name].items():
-        mine = ours[key][0] if isinstance(ours[key], tuple) else ours[key]
         if isinstance(ref, tuple):
-            assert abs(mine - ref[0]) < 0.25 * ref[1], key
+            assert abs(ours[key] - ref[0]) < 0.25 * ref[1], key
         else:
-            assert mine == pytest.approx(ref, abs=0.25), key
+            assert ours[key] == pytest.approx(ref, abs=0.25), key
